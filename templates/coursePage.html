@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+
+
+    {% for lecture in lectures %}
+    {{lecture.lecture_name}}
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}
+
+
+
+
