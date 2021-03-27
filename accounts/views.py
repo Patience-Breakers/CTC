@@ -212,23 +212,45 @@ def nextlect(request, studentid, courseid, lectid):
     #         watch.completed='True'
     #         watchtimelist.append(watch)
     # print("#####################",mywatch_time,"#####################")
-    return redirect(openLecturefromstudent,
+    course = Course.objects.get(pk=courseid)
+    myteacher = Teacher.objects.get(course__pk=courseid)
+    lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid)
+    new_lecture = None
+    flag = 0
+    for lect in lectures:
+      if lect.pk==lectid:
+        flag=1
+        continue
+      if flag==1:          
+        new_lecture = lect
+        break
+    # lectids = []
+    # for lect in lectures:
+    #     lectids.append(lect.pk)
+
+    if new_lecture is not None:
+      return redirect(openLecturefromstudent,
                     studentid=studentid,
                     courseid=courseid,
-                    lectid=lectid + 1)
+                    lectid=new_lecture.pk)
+    else:
+      return redirect(openLectlistfromstudent,
+                    studentid=studentid,
+                    courseid=courseid)
     # course = Course.objects.get(pk=courseid)
     # student = Student.objects.get(pk=studentid)
     # lecture = Lecture.objects.get(pk=lectid)
     # myteacher = Teacher.objects.get(course__pk = courseid)
     # new_lecture = Lecture.objects.get(pk=lectid+1)
     # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid+1)
-    # if new_lecture is not None:
-    #   context = {
-    #       'lecture': new_lecture,
-    #       'student': student,
-    #       'course': course,
-    #       'Watch_time': mywatch_time,
-    #   }
+    # 
+    #   # context = {
+    #   #     'lecture': new_lecture,
+    #   #     'student': student,
+    #   #     'course': course,
+    #   #     'Watch_time': mywatch_time,
+    #   # }
     #   return render(request, 'openLecturefromstudent.html', context)
     # return HttpResponse('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid+1>')
 
@@ -255,10 +277,9 @@ def complete(request, studentid, courseid, lectid):
     #         watch.completed='True'
     #         watchtimelist.append(watch)
     # print("#####################",mywatch_time,"#####################")
-    return redirect(openLecturefromstudent,
+    return redirect(openLectlistfromstudent,
                     studentid=studentid,
-                    courseid=courseid,
-                    lectid=lectid + 1)
+                    courseid=courseid)
 
 
 def openCourse(request, courseid):
