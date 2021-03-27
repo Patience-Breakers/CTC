@@ -209,16 +209,33 @@
               <source src="movie.ogg" type="video/ogg">
               Your browser does not support the video tag.
             </video>
-            <form action="/students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/" method="POST"  >
-            <!-- {% csrf_token %}
+            <!-- <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST"  >
+            {% csrf_token %}
               <label for="rating">Rate the video </label>
               <input type="range" id="rating" name="rating" min="1" max="5">
               <input type="submit">
             </form>  -->
-            {% csrf_token %}
-            <form class="rating">
+             <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST">
+                        {% csrf_token %}
+            <div class="form-group">
+                                    <label id="white" for="rating">Rating for the video</label>
+                                    <select class="form-control" id="rating" name="rating">
+                                        <option id="black">1</option>
+                                        <option id="black">2</option>
+                                        <option id="black">3</option>                      
+                                        <option id="black">4</option>             
+                                        <option id="black">5</option>
+                                    </select>
+                                </div>
+                                <div class="text-center">
+                                    <input style="font-weight:800;" class="text-center" id="commonbuttons" 
+                                        type="submit">
+                                </div>
+                    </form>
+            <!-- {% csrf_token %} -->
+            <!-- <form class="rating">
             <!-- <label for="rating">Rate the video </label> -->
-            <label>
+            <!-- <label>
               <input type="radio" name="stars" value="1" />
               <span class="icon">★</span>
               <br>
@@ -253,7 +270,7 @@
               <span class="icon">★</span>
               <br>
             </label>
-          </form>
+          </form> --> 
 
             <!-- <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="next/">Next lecture</a>
             <br>

@@ -119,19 +119,19 @@ def openstudent(request, studentid):
         for lect in lectures:
           lect_counter+=1
           mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
-              w_lect__pk=lect.lectid)
+              w_lect__pk=lect.pk)
           for watch in mywatch_time:
             if watch.completed==True:
               watch_counter+=1
-        mylist.append((watch_counter/lect_counter)*100)
+        mylist.append(int((watch_counter/lect_counter)*100))
               
     # completed=[]
     # for course in courses:
-    myfile = zip(mylist, watchtimelist)
+    myfile = zip(mylist, courses)
     context = {
         'student': student,
-        'courses': courses,
-        'mylist' : mylist,
+        'myfile' : myfile,
+        'course':courses[0].course_name,
     }
     return render(request, 'studentPage.html', context)
 
@@ -206,7 +206,12 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
         for watch in mywatch_time:
             watch.Rating=rating
             watch.save()
-            pass
+            # redirect(openLecturefromstudent,
+            #         studentid=studentid,
+            #         courseid=courseid,
+            #         lectid=new_lecture.pk)
+        return redirect(openLecturefromstudent, studentid=studentid,courseid=courseid,
+                    lectid=lectid)
     else:
         myteacher = Teacher.objects.get(course__pk=courseid)
         lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(
@@ -315,9 +320,10 @@ def complete(request, studentid, courseid, lectid):
 
 
 def openCourse(request, courseid):
-    # album = Album.objects.filter(pk=albumid)
-    lectures = Lecture.objects.filter(course_no__pk=courseid)
-    context = {'lectures': lectures}
+    myteacher = Teacher.objects.get(course__pk = courseid)
+    lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    context = {'lectures': lectures,
+                'teacher' : myteacher.teacher_name}
     return render(request, 'coursePage.html', context)
 
 
@@ -329,11 +335,32 @@ def teachercources(request, teacherid):
     # album = Album.objects.filter(pk=albumid)
     pass
 
-
 def viewallcourses(request):
     courses = Course.objects.all()
+    mylist=[]
+    for course in courses :      
+        myteacher = Teacher.objects.get(course__pk=course.pk)
+        lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+        lect_counter = 0
+        watch_counter=0
+        rating = 0
+        for lect in lectures:
+          lect_counter+=1
+          mywatch_time = Watch_time.objects.filter(w_lect__pk=lect.pk)
+          watch_counter=0
+          for watch in mywatch_time:           
+            if watch.completed==True:
+              watch_counter+=1
+              rating = rating  + watch.Rating
+          if watch_counter!=0:
+            rating= rating /watch_counter            
+        if lect_counter!=0:
+          rating = rating/lect_counter          
+        mylist.append(int(rating)*'★')
+    
+    myfile = zip(mylist, courses)
     context = {
-        'courses': courses,
+        'myfile': myfile,
     }
     return render(request, 'allcourses.html', context)
 

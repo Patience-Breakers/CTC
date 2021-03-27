@@ -16,7 +16,7 @@ All courses - TSEC HACK COURSERA APP
                     mattis vitae leo.</p>
             </div>
             <div class="row justify-content-center">
-                {% for course in courses %}
+                {% for mylist,course in myfile %}
                 <div class="col-sm-6 col-lg-4">
                     <a href="/openCourse/{{course.pk}}" style="text-decoration: none; color :black;">
                         <div class="card text-center clean-card">
@@ -24,7 +24,7 @@ All courses - TSEC HACK COURSERA APP
                             <div class="card-body info">
                                 <h4 class="card-title">{{course.course_name}}</h4>
                                 <p class="card-text">{{course.desc}}</p>
-
+                                <h3 class="card-text">Rating : {{mylist}}</p>
                             </div>
                         </div>
                     </a>
