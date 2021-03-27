@@ -21,37 +21,54 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+
 #crawler ka funciton
 def crawler(request):
     if request.method == 'POST':
         query = request.POST['query']
-        results = 5
         page = requests.get(f"https://www.google.com/search?q={query}&num={5}")
         soup = BeautifulSoup(page.content, "html.parser")
         links = soup.findAll("a")
-        res = 0
-        results = {}
+        name = soup.find_all('h3')
+        c = 0
+        #print([n.getText() for n in name])
+        results = []
+        print(len(name),len(links))
+        #print(list(zip(name,links)))
         for link in links:
-            per_res = {}
             link_href = link.get('href')
             if "url?q=" in link_href and not "webcache" in link_href:
-                #per_res.update("Inner Text ={}.format(link.text))
-                if link.get('title'):
-                  per_res.update({"Title ":link.get("title")})
-                if link.parent.get("id"):
-                  per_res.update({"Name " :link.parent.get("id")})
-                per_res.update({"Link":link.get('href').split("?q=")[1].split("&sa=U")[0]})
-                res += 1
-            results.update(per_res)
-            if res > 5:
-                break
                 
-        results=list(results.values())   
+                res = link.get('href').split("?q=")[1].split("&sa=U")[0]
+                results.append(res)
+                c+=1
+            if c > 5:
+                break
+        # page = requests.get(f"https://www.google.com/search?q={query}&num={5}")
+        # soup = BeautifulSoup(page.content, "html.parser")
+        # links = soup.findAll("a")
+        # res = 0
+        # results = {}
+        # for link in links:
+        #     per_res = {}
+        #     link_href = link.get('href')
+        #     if "url?q=" in link_href and not "webcache" in link_href:
+        #         #per_res.update("Inner Text ={}.format(link.text))
+        #         if link.get('title'):
+        #           per_res.update({"Title ":link.get("title")})
+        #         if link.parent.get("id"):
+        #           per_res.update({"Name " :link.parent.get("id")})
+        #         per_res.update({"Link":link.get('href').split("?q=")[1].split("&sa=U")[0]})
+        #         res += 1
+        #     results.update(per_res)
+        #     if res > 5:
+        #         break
         print(results) 
         context={
-            'results':results[0]
+            'results':results
           }
         return render(request,'crawlerResult.html',context)               
+
 
 
 def calendar(request):
@@ -131,13 +148,20 @@ def openLectlistfromstudent(request, studentid, courseid):
     course = Course.objects.get(pk=courseid)
     myteacher = Teacher.objects.get(course__pk = courseid)
     lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
-    # mywatch_time = Watch_time.objects.filter(student__pk=studentid)
-    
+    mywatch_time = Watch_time.objects.filter(student__pk=studentid)
+    lectids=[]
+    for lect in lectures:
+      lectids.append(lect.pk)
+    watchtimelist=[]
+    for watch in mywatch_time :
+      if watch.w_lect.pk in lectids:
+        watchtimelist.append(watch)
+      
     mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
     context = {
         'lectures': lectures,
         'studentid': studentid,
-        'Watch_time': mywatch_time,
+        'Watch_time': watchtimelist,
         'course': course,
     }
     return render(request, 'opencoursefromstudent.html', context)
