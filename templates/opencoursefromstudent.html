@@ -157,7 +157,7 @@
                                     </thead>
                                     <tbody>
 
-                                      	{% for lecture in lectures %}
+                                      	{% for lecture,watchtime in lectures,Watch_times %}
                                      <tr> 
 
                                           
@@ -169,7 +169,7 @@
                                             <td>{{lecture.lec_no}}</td>
                                             
                                             <td>{{lecture.lec_date}}<br></td>
-                                            <td>{% if Watch_time.completed %}
+                                            <td>{% if watchtime.completed %}
                                                   <p> Completed </p>
                                               {% else %}
                                                   <p> Not Completed </p>

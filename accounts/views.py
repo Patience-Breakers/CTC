@@ -131,9 +131,13 @@ def openLectlistfromstudent(request, studentid, courseid):
     course = Course.objects.get(pk=courseid)
     myteacher = Teacher.objects.get(course__pk = courseid)
     lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid)
+    
+    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
     context = {
         'lectures': lectures,
-        # 'studentid': studentid,
+        'studentid': studentid,
+        'Watch_time': mywatch_time,
         'course': course,
     }
     return render(request, 'opencoursefromstudent.html', context)
@@ -162,13 +166,27 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
 def nextlect(request, studentid, courseid, lectid):
     #  mywatch_time = Watch_time.objects.filter(student__pk=studentid).get(w_lect__pk=lectid)
     mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
-    mywatch_time.completed='True'
-    mywatch_time.completed_date=date.today()
 
+    mywatch_time[0].completed='True'
+    mywatch_time[0].completed_date=date.today()
+    # print("#####################",mywatch_time,"#####################")
+    return redirect(openLecturefromstudent, studentid=studentid , courseid=courseid ,lectid=lectid+1)
+    # course = Course.objects.get(pk=courseid)
+    # student = Student.objects.get(pk=studentid)
+    # lecture = Lecture.objects.get(pk=lectid)
     # myteacher = Teacher.objects.get(course__pk = courseid)
-    new_lecture = Lecture.objects.get(pk=lectid+1)
-    # if new_lecture is not Null:
-    openLecturefromstudent(request, studentid, courseid, new_lecture.pk)
+    # new_lecture = Lecture.objects.get(pk=lectid+1)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid+1)
+    # if new_lecture is not None:
+    #   context = {
+    #       'lecture': new_lecture,
+    #       'student': student,
+    #       'course': course,
+    #       'Watch_time': mywatch_time,
+    #   }
+    #   return render(request, 'openLecturefromstudent.html', context)
+    # return HttpResponse('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid+1>')
+    
     # pass
 
 
