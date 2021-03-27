@@ -236,11 +236,11 @@ def nextlect(request, studentid, courseid, lectid):
 
 def complete(request, studentid, courseid, lectid):
     #  mywatch_time = Watch_time.objects.filter(student__pk=studentid).get(w_lect__pk=lectid)
-    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
-        # w_lect__pk=lectid)
+    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+        w_lect__pk=lectid)
 
-    # mywatch_time[0].completed = 'True'
-    # mywatch_time[0].completed_date = date.today()
+    mywatch_time[0].completed = 'True'
+    mywatch_time[0].completed_date = date.today()
     # lecture = Lecture.objects.get(pk=lectid)
     # watchtimelist=[]
     # for watch in mywatch_time:
