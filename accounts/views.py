@@ -101,12 +101,37 @@ def allstudents(request):
 def openstudent(request, studentid):    
     student = Student.objects.get(pk=studentid)
     courses = student.courses.all()
+    # lectids = []
+    # for lect in lectures:
+    #     lectids.append(lect.pk)
+    # watchtimelist = []
+    # for watch in mywatch_time:
+    #     if watch.w_lect.pk in lectids:
+    #         watchtimelist.append(watch)
     # completed=[]
     # for course in courses:
-      
+    mylist=[]
+    for course in courses :      
+        myteacher = Teacher.objects.get(course__pk=course.pk)
+        lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+        lect_counter = 0
+        watch_counter=0
+        for lect in lectures:
+          lect_counter+=1
+          mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+              w_lect__pk=lect.lectid)
+          for watch in mywatch_time:
+            if watch.completed==True:
+              watch_counter+=1
+        mylist.append((watch_counter/lect_counter)*100)
+              
+    # completed=[]
+    # for course in courses:
+    myfile = zip(mylist, watchtimelist)
     context = {
         'student': student,
         'courses': courses,
+        'mylist' : mylist,
     }
     return render(request, 'studentPage.html', context)
 

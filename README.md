@@ -41,3 +41,20 @@ We suggest bringing a database using an outside service.
 
 See Django documentation on how to setup a database: https://docs.djangoproject.com/en/3.0/intro/tutorial02/
 
+
+## generate the pdf
+
+
+        <a href="#" onclick="generator()">genrate the pdf</a>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+
+        <!--todo to make the pdf nav-->
+        <script>
+            function generator() {
+                var doc = new jsPDF();
+                doc.text('Hello world!', 10, 10);
+                doc.save('a4.pdf');
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
