@@ -244,6 +244,8 @@ def complete(request, studentid, courseid, lectid):
     for watch in mywatch_time:
       watch.completed='True'
       watch.completed_date=date.today()
+      watch.save()
+      # print("#####################",watch.student,watch.w_lect.lecture_name,watch.completed,watch.completed_date,"#####################")
     # mywatch_time.model.completed='True'
     # mywatch_time.model.completed_date=date.today()
     # lecture = Lecture.objects.get(pk=lectid)
