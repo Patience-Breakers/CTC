@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<title>
-		{{student.name}}
+		{{student.name}} | Dashboard
 	</title>
 	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -59,13 +59,16 @@
                                         class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in"
                                     aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small"
-                                                type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0"
-                                                    type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
+                                     <form action='/search' method="POST"
+                            class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+{% csrf_token %}
+
+                            <div class="input-group"><input name="query" id="query" for="query" class="bg-light form-control border-0 small" type="text"
+                                    placeholder="Search for material from our crawler">
+                                <div class="input-group-append"><button class="btn btn-primary py-0" type="submit"><i
+                                            class="fas fa-search"></i></button></div>
+                            </div>
+                        </form>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -106,12 +109,10 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        aria-expanded="false" data-toggle="dropdown" href="#"><span
-                                            class="badge badge-danger badge-counter">7</span><i
-                                            class="fas fa-envelope fa-fw"></i></a>
+                                <div class="nav-item dropdown no-arrow">
                                     <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a
                                             class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image mr-3"><img class="rounded-circle"
                                                     src="assets/img/avatars/avatar4.jpeg">
@@ -165,9 +166,9 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-toggle="dropdown" href="#"><span
-                                            class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img
+                                            class="d-none d-lg-inline mr-2 text-gray-600 small">	{{student.name}}</span><img
                                             class="border rounded-circle img-profile"
-                                            src="assets/img/avatars/avatar1.jpeg"></a>
+                                            src="/media/{{student.image}}"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a
                                             class="dropdown-item" href="#"><i
                                                 class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a
@@ -186,7 +187,7 @@
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Dashboard</h3><a 
+                        <h3 class="text-dark mb-0">Courses Enrolled </h3><a 
                             class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i
                                 class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
                     </div>

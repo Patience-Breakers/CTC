@@ -161,7 +161,7 @@ def openLectlistfromstudent(request, studentid, courseid):
     }
 
     for i in watchtimelist:
-        print("#####################", i.completed, "#####################")
+        print("#####################", i.completed,i.student, "#####################")
 
     # mylist = zip(bed_lists, newbedlist)
     #         context = {'mylist': mylist,}
@@ -239,8 +239,13 @@ def complete(request, studentid, courseid, lectid):
     mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
         w_lect__pk=lectid)
 
-    mywatch_time.completed = 'True'
-    mywatch_time.completed_date = date.today()
+    # mywatch_time.completed = 'True'
+    # mywatch_time.completed_date = date.today()
+    for watch in mywatch_time:
+      watch.completed='True'
+      watch.completed_date=date.today()
+    # mywatch_time.model.completed='True'
+    # mywatch_time.model.completed_date=date.today()
     # lecture = Lecture.objects.get(pk=lectid)
     # watchtimelist=[]
     # for watch in mywatch_time:
