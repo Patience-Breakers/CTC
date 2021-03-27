@@ -3,38 +3,47 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <!--todo title & favicon-->
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon"
-        href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<!--todo title & favicon-->
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="shortcut icon" href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png"
+	/>
 
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
-    <link rel="stylesheet" href="{% static 'fonts/simple-line-icons.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
-    <link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% block css %}{% endblock %}
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+	<link rel="stylesheet" href="{% static 'fonts/simple-line-icons.min.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+	<link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  {% block	css %}{% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="/">TSEC HACK</a><button data-toggle="collapse"
+	<nav class="navbar navbar-light navbar-expand-lg fixed top bg-white clean-navbar">
+		<div class="container"><a class="navbar-brand logo" href="/">TSEC HACK</a><button data-toggle="collapse"
                 class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/allstudents">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/calendar">Calendar</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/">Home</a>
+                      </li>                  
+                    <li class="nav-item">
+                      <a class="nav-link " href="/allstudents">
+                    Login
+                    </a>
+                    </li>
+                      <li class="nav-item">
+                        <a class="nav-link " href="/addstudent">Sign Up</a>
+                        </li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li> -->
+                    <!-- <li class="nav-item"><a class="nav-link" href="/calendar">Calendar</a></li>
                     <li class="nav-item"><a class="nav-link" href="/assignments">Assignments</a></li>
                     <li class="nav-item"><a class="nav-link" href="/grades">Grades</a></li>
                     <li class="nav-item"><a class="nav-link" href="/teachers">Teachers</a></li>
                     <li class="nav-item"><a class="nav-link" href="/classnotes">Class Notes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/allcourses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/allcourses">Courses</a></li> -->
                 </ul>
             </div>
         </div>
