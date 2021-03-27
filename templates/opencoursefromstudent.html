@@ -157,11 +157,11 @@
                                     </thead>
                                     <tbody>
 
-                                      	{% for lecture,watchtime in lectures,Watch_times %}
+                                      	{% for lecture,watchtime in mylist %}
                                      <tr> 
 
                                           
-                                            <td><img class="rounded-circle mr-2" width="300" height="100%" src="/media/{{lecture.thumbnail}}"></td>
+                                            <td><img class="rounded-circle mr-2" width="150" height="150" src="/media/{{lecture.thumbnail}}"></td>
 
                                             <td>  <a href="lecture/{{lecture.pk}}"> {{lecture.lecture_name}}
                                          </a></td>

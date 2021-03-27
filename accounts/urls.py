@@ -14,7 +14,7 @@ urlpatterns = [
     path("classnotes/", views.classnotes, name='classnotes'),
     path("search", views.crawler, name='crawler'),
 
-    path('addStudent/',views.addstudent,name="addstudent"),
+    path('addstudent',views.addstudent,name="addstudent"),
 
     path("allcourses/", views.viewallcourses, name='allcourses'),
     path('openCourse/<int:courseid>/', views.openCourse, name='openCourse'),
@@ -31,6 +31,8 @@ urlpatterns = [
          views.openLecturefromstudent, name='openLecturefromstudent'),
     path('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/next/',
          views.nextlect, name='nextlect'),
+    path('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/complete/',
+         views.complete, name='complete'),
     # path('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/next/',
     #      views.nextlect, name='nextlect'),
 

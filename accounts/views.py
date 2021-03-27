@@ -21,7 +21,6 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
-
 #crawler ka funciton
 def crawler(request):
     if request.method == 'POST':
@@ -33,15 +32,15 @@ def crawler(request):
         c = 0
         #print([n.getText() for n in name])
         results = []
-        print(len(name),len(links))
+        print(len(name), len(links))
         #print(list(zip(name,links)))
         for link in links:
             link_href = link.get('href')
             if "url?q=" in link_href and not "webcache" in link_href:
-                
+
                 res = link.get('href').split("?q=")[1].split("&sa=U")[0]
                 results.append(res)
-                c+=1
+                c += 1
             if c > 5:
                 break
         # page = requests.get(f"https://www.google.com/search?q={query}&num={5}")
@@ -63,12 +62,9 @@ def crawler(request):
         #     results.update(per_res)
         #     if res > 5:
         #         break
-        print(results) 
-        context={
-            'results':results
-          }
-        return render(request,'crawlerResult.html',context)               
-
+        print(results)
+        context = {'results': results}
+        return render(request, 'crawlerResult.html', context)
 
 
 def calendar(request):
@@ -112,8 +108,6 @@ def openstudent(request, studentid):
     return render(request, 'studentPage.html', context)
 
 
-
-
 def handlelogin(request):
     # student = Student.objects.get(pk=studentid)
     #   courses = student.courses.all()
@@ -135,7 +129,7 @@ def handlelogin(request):
             str_pass = '/students/' + str(studentid)
             return redirect(str_pass)
         else:
-          return redirect('/')
+            return redirect('/')
 
     return render(request, 'login.html')
 
@@ -146,55 +140,82 @@ def handlelogout():
 
 def openLectlistfromstudent(request, studentid, courseid):
     course = Course.objects.get(pk=courseid)
-    myteacher = Teacher.objects.get(course__pk = courseid)
+    myteacher = Teacher.objects.get(course__pk=courseid)
     lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
     mywatch_time = Watch_time.objects.filter(student__pk=studentid)
-    lectids=[]
+    lectids = []
     for lect in lectures:
-      lectids.append(lect.pk)
-    watchtimelist=[]
-    for watch in mywatch_time :
-      if watch.w_lect.pk in lectids:
-        watchtimelist.append(watch)
-      
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
+        lectids.append(lect.pk)
+    watchtimelist = []
+    for watch in mywatch_time:
+        if watch.w_lect.pk in lectids:
+            watchtimelist.append(watch)
+
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
+    mylist = zip(lectures, watchtimelist)
     context = {
-        'lectures': lectures,
+        # 'lectures' :lectures,
+        'mylist': mylist,
         'studentid': studentid,
-        'Watch_time': watchtimelist,
         'course': course,
     }
+
+    for i in watchtimelist:
+        print("#####################", i.completed, "#####################")
+
+    # mylist = zip(bed_lists, newbedlist)
+    #         context = {'mylist': mylist,}
+    # return render(request, 'bedavalibility.html', context)
+    # {% for a,b in mylist %}
     return render(request, 'opencoursefromstudent.html', context)
 
+
 def openLecturefromstudent(request, studentid, courseid, lectid):
-  if request.method == 'POST':
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
-    pass
-  else :
-    myteacher = Teacher.objects.get(course__pk = courseid)
-    lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(pk=lectid)
-    course = Course.objects.get(pk=courseid)
-    student = Student.objects.get(pk=studentid)
-    lecture = Lecture.objects.get(pk=lectid)
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
-    # iscomplete = mywatch_time.completed
-    # lecture =
-    context = {
-        'lecture': lecture,
-        'student': student,
-        'course': course,
-        'Watch_time': mywatch_time,
-    }
-    return render(request, 'openLecturefromstudent.html', context)
+    if request.method == 'POST':
+        mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+            w_lect__pk=lectid)
+        pass
+    else:
+        myteacher = Teacher.objects.get(course__pk=courseid)
+        lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(
+            pk=lectid)
+        course = Course.objects.get(pk=courseid)
+        student = Student.objects.get(pk=studentid)
+        lecture = Lecture.objects.get(pk=lectid)
+        
+        mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+            w_lect__pk=lectid)
+       
+
+        # iscomplete = mywatch_time.completed
+        # lecture =
+        context = {
+            'lecture': lecture,
+            'student': student,
+            'course': course,
+            'Watch_time': mywatch_time,
+        }
+        return render(request, 'openLecturefromstudent.html', context)
+
 
 def nextlect(request, studentid, courseid, lectid):
     #  mywatch_time = Watch_time.objects.filter(student__pk=studentid).get(w_lect__pk=lectid)
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+        # w_lect__pk=lectid)
 
-    mywatch_time[0].completed='True'
-    mywatch_time[0].completed_date=date.today()
+    # mywatch_time[0].completed = 'True'
+    # mywatch_time[0].completed_date = date.today()
+    # lecture = Lecture.objects.get(pk=lectid)
+    # watchtimelist=[]
+    # for watch in mywatch_time:
+    #     if watch.w_lect.pk in lecture:
+    #         watch.completed='True'
+    #         watchtimelist.append(watch)
     # print("#####################",mywatch_time,"#####################")
-    return redirect(openLecturefromstudent, studentid=studentid , courseid=courseid ,lectid=lectid+1)
+    return redirect(openLecturefromstudent,
+                    studentid=studentid,
+                    courseid=courseid,
+                    lectid=lectid + 1)
     # course = Course.objects.get(pk=courseid)
     # student = Student.objects.get(pk=studentid)
     # lecture = Lecture.objects.get(pk=lectid)
@@ -210,9 +231,27 @@ def nextlect(request, studentid, courseid, lectid):
     #   }
     #   return render(request, 'openLecturefromstudent.html', context)
     # return HttpResponse('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid+1>')
-    
+
     # pass
 
+def complete(request, studentid, courseid, lectid):
+    #  mywatch_time = Watch_time.objects.filter(student__pk=studentid).get(w_lect__pk=lectid)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
+        # w_lect__pk=lectid)
+
+    # mywatch_time[0].completed = 'True'
+    # mywatch_time[0].completed_date = date.today()
+    # lecture = Lecture.objects.get(pk=lectid)
+    # watchtimelist=[]
+    # for watch in mywatch_time:
+    #     if watch.w_lect.pk in lecture:
+    #         watch.completed='True'
+    #         watchtimelist.append(watch)
+    # print("#####################",mywatch_time,"#####################")
+    return redirect(openLecturefromstudent,
+                    studentid=studentid,
+                    courseid=courseid,
+                    lectid=lectid + 1)
 
 
 def openCourse(request, courseid):
@@ -247,8 +286,6 @@ def studentprofile(request, studentid):
     return render(request, 'student_profile.html', context)
 
 
-
-
 def addstudent(request):
     # if we get POST method, we will use this
     if request.method == 'POST':
@@ -256,7 +293,7 @@ def addstudent(request):
         # check whether it's valid:
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/allstudents/')
+            return HttpResponseRedirect('/')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = StudentForm()
