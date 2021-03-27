@@ -149,7 +149,8 @@
                                             <th>Lecture Name</th>     
                                             <th>Lecture Number</th>
                                             <th>Lecture Date</th>
-                                            <th>Completed</th>
+                                            <th>Status</th>
+                                            <th>Completed on</th>
 
                                             <!-- <th>Lecturer</th>
                                             <th></th> -->
@@ -172,8 +173,15 @@
                                             <td>{% if watchtime.completed %}
                                                   <p> Completed </p>
                                               {% else %}
-                                                  <p> Not Completed </p>
+                                                  <p> Not Started </p>
                                               {% endif %}</td>
+
+                                            <td>{% if watchtime.completed %}
+                                                  <p> {{watchtime.completed_date}} </p>
+                                              {% else %}
+                                                  <p> --- </p>
+                                              {% endif %}</td>
+                                            <!-- <td>{{watchtime.completed_date}}</td> -->
 
                                         </tr> 
         	{% endfor %}

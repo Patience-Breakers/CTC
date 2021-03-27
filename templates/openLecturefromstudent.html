@@ -1,40 +1,4 @@
-{% load static %} {% block body %}
-
-<main class="page">
-	<section class="clean-block about-us">
-		<div class="container">
-			<div class="block-heading">
-				<h2 class="text-info">Lecture</h2>
-				<h2 class="text-info">{{student.pk}} {{student.name}}</h2>
-				<h2 class="text-info">{{course.course_name}}</h2>
-				<h2 class="text-info">{{lecture.lecture_name}}</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-sm-6 col-lg-4">
-					<!-- <a href="/openCourse/{{course.pk}}" style="text-decoration: none; color :black;"> -->
-					<div class="card text-center clean-card">
-						<img class="card-img-top w-100 d-block" src="/media/{{course.course_image}}">
-                            <div class="card-body info">
-                                <!-- <h4 class="card-title">{{lecture.lecture_name}}</h4> -->
-                                <p class="card-text">{{course.desc}}</p>                                
-                                <!-- <a href="next/">Next</a> -->
-                                <!-- <a href="next/">Completed the Lecture</a> -->
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-{% endblock %}
-
-
-
-
-
+{% load static %} 
 <!DOCTYPE html>
 <html>
 
@@ -47,6 +11,73 @@
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
+  <style>
+    .rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
+</style>
 </head>
 
 <body id="page-top">
@@ -179,11 +210,50 @@
               Your browser does not support the video tag.
             </video>
             <form action="/students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/" method="POST"  >
-            {% csrf_token %}
+            <!-- {% csrf_token %}
               <label for="rating">Rate the video </label>
               <input type="range" id="rating" name="rating" min="1" max="5">
               <input type="submit">
-            </form> 
+            </form>  -->
+            {% csrf_token %}
+            <form class="rating">
+            <!-- <label for="rating">Rate the video </label> -->
+            <label>
+              <input type="radio" name="stars" value="1" />
+              <span class="icon">★</span>
+              <br>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="2" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <br>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="3" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span> 
+              <br>  
+            </label>
+            <label>
+              <input type="radio" name="stars" value="4" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <br>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="5" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <br>
+            </label>
+          </form>
 
             <!-- <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="next/">Next lecture</a>
             <br>
@@ -208,6 +278,9 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script>$(':radio').change(function() {
+  console.log('New star rating: ' + this.value);
+});</script>
 </body>
 
 </html>

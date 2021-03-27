@@ -98,9 +98,12 @@ def allstudents(request):
 
 
 #open student aka dashboard
-def openstudent(request, studentid):
+def openstudent(request, studentid):    
     student = Student.objects.get(pk=studentid)
     courses = student.courses.all()
+    # completed=[]
+    # for course in courses:
+      
     context = {
         'student': student,
         'courses': courses,
@@ -172,9 +175,13 @@ def openLectlistfromstudent(request, studentid, courseid):
 
 def openLecturefromstudent(request, studentid, courseid, lectid):
     if request.method == 'POST':
+        rating = request.POST['rating']
         mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
             w_lect__pk=lectid)
-        pass
+        for watch in mywatch_time:
+            watch.Rating=rating
+            watch.save()
+            pass
     else:
         myteacher = Teacher.objects.get(course__pk=courseid)
         lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(
@@ -307,11 +314,11 @@ def viewallcourses(request):
 
 
 def studentprofile(request, studentid):
-    student = Student.objects.get(pk=studentid)
-    context = {
-        'student': student,
-    }
-    return render(request, 'student_profile.html', context)
+      student = Student.objects.get(pk=studentid)
+      context = {
+          'student': student,
+      }
+      return render(request, 'student_profile.html', context)
 
 
 def addstudent(request):
