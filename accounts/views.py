@@ -12,10 +12,11 @@ from .forms import StudentForm
 # import collections
 from .models import Teacher
 
-
 def index(request):
     return render(request, 'index.html')
 
+def blank(request):
+    return render(request, 'blank.html')
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -109,7 +110,8 @@ def openstudent(request, studentid):
     #     if watch.w_lect.pk in lectids:
     #         watchtimelist.append(watch)
     # completed=[]
-    # for course in courses:
+    # for course in courses
+    print(courses)
     mylist=[]
     for course in courses :      
         myteacher = Teacher.objects.get(course__pk=course.pk)
@@ -124,14 +126,25 @@ def openstudent(request, studentid):
             if watch.completed==True:
               watch_counter+=1
         mylist.append(int((watch_counter/lect_counter)*100))
-              
+    graphlist=[]
+    sum=0
+    for list in mylist:
+        sum = sum+list
+    for list in mylist:
+      if sum!=0:
+        graphlist.append((list/sum*100))      
+      else :
+        graphlist.append(0) 
     # completed=[]
     # for course in courses:
     myfile = zip(mylist, courses)
     context = {
         'student': student,
         'myfile' : myfile,
+        'mylist' : mylist,
+        'courses':courses,
         'course':courses[0].course_name,
+        'graphlist' : graphlist,
     }
     return render(request, 'studentPage.html', context)
 
@@ -184,6 +197,7 @@ def openLectlistfromstudent(request, studentid, courseid):
     context = {
         # 'lectures' :lectures,
         'mylist': mylist,
+        'student' : Student.objects.get(pk=studentid),
         'studentid': studentid,
         'course': course,
     }

@@ -10,12 +10,12 @@ Teachers - TSEC HACK COURSERA APP
         <section class="clean-block about-us">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Teachers</h2>
-                    {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p> {% endcomment %}
+                    <h2 class="text-info">All Teachers</h2>
                 </div>
-                {% for tea in tech %}
+                
                  <!-- <a href="teacher/{{ tea.pk }}" style="text-decoration: none; color :black;"> -->
                 <div class="row justify-content-center">
+                  {% for tea in tech %}
                     <div class="col-sm-6 col-lg-4">
                         <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="/media/{{tea.teacher_image}}">
                             <div class="card-body info">
@@ -26,8 +26,9 @@ Teachers - TSEC HACK COURSERA APP
                             </div>
                         </div>
                     </div>
-                    </div>
                     {% endfor %}
+                    </div>
+                    
                 </div>
             </div>
         </section>

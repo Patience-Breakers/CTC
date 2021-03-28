@@ -14,7 +14,8 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">   
+
 </head>
 
 <body id="page-top">
@@ -340,29 +341,80 @@
                         <div class="col-lg-5 col-xl-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary font-weight-bold m-0">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle"
-                                            aria-expanded="false" data-toggle="dropdown" type="button"><i
-                                                class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a
-                                                class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
-                                                href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item"
-                                                href="#">&nbsp;Something else here</a>
-                                        </div>
-                                    </div>
+                                    <h6 class="text-primary font-weight-bold m-0">Course Completion</h6>
+                               
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas
-                                            data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Direct&quot;,&quot;Social&quot;,&quot;Referral&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas>
+                                    <div class="chart-area">
+                                       <!--todo added the script tag here so that I can render the site fast-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+            crossorigin="anonymous"></script>
+                                      <canvas id="myaChart" width="40px" height="40px"></canvas>
+                  <script>
+                        var ctx = document.getElementById('myaChart').getContext('2d');
+                        ctx.canvas.parentNode.style.width = "350px";
+                        ctx.canvas.parentNode.style.height = "350px";
+
+                        width = screen.width;
+                        if (width < 600) {
+                            ctx.canvas.parentNode.style.width = "300px";
+                            ctx.canvas.parentNode.style.height = "300px";
+                        }
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: [
+                                {% for course in courses %}
+                               
+                                  '{{course.course_name}}',
+                                 {% endfor %}      
+                    ],
+                        datasets: [{
+                            label: '# of Votes',
+
+                            data: [
+                                {% for list in graphlist %}
+                           {{list}},
+                        {% endfor %}
+
+
+                        ],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                    borderWidth: 1
+                    }]
+                },
+                        options: {
+                            scales: {
+
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }, scales: false,
+
+                }
+            });
+                    </script>
                                     </div>
-                                    <div class="text-center small mt-4"><span class="mr-2"><i
-                                                class="fas fa-circle text-primary"></i>&nbsp;Direct</span><span
-                                            class="mr-2"><i
-                                                class="fas fa-circle text-success"></i>&nbsp;Social</span><span
-                                            class="mr-2"><i class="fas fa-circle text-info"></i>&nbsp;Refferal</span>
-                                    </div>
+
+                                 
                                 </div>
                             </div>
                         </div>
