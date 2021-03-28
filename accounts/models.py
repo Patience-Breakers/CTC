@@ -62,7 +62,6 @@ class Lecture (models.Model):
     video = models.FileField(upload_to="videos/", null=True)
     material = models.FileField(upload_to="lec_materials/", null=True)
     thumbnail = models.ImageField(upload_to="course-images/", default="")
-
     def _str_(self):
         return self.lec_no
 
@@ -72,6 +71,10 @@ class Watch_time(models.Model):
   completed = models.BooleanField(default = False)
   completed_date = models.DateField(auto_now=True, auto_now_add=False)
   Rating =  models.IntegerField(default=0)
+
+
+# class Task(models.Model):
+#   student = models.ForeignKey(Student, on_delete=models.CASCADE, default="")
 
 
 

@@ -12,6 +12,22 @@
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
   <style>
+
+  .alignleft {
+  float: left;
+  width:33.33333%;
+  text-align:left;
+}
+.aligncenter {
+  float: left;
+  width:33.33333%;
+  text-align:center;
+}
+.alignright {
+ float: left;
+ width:33.33333%;
+ text-align:right;
+}​
     .rating {
   display: inline-block;
   position: relative;
@@ -199,14 +215,15 @@
                 <div class="container-fluid">
                      <div class="block-heading">
                 <h2 class="text-black">Course : {{course.course_name}}</h2>
-                <h2 class="text-black">Lecture No : {{lecture.lecture_no}}. {{lecture.lecture_name}} </h2>
+                <h2 class="text-black">Lecture : {{lecture.lec_no}}. {{lecture.lecture_name}} </h2>
+                <!-- <h2 class="text-black">Lecture Video path : {{Lecture.video}} </h2> -->
             </div>
-            <video width="100%" height="600px" controls>
+            <!-- <video width="100%" height="600px" controls>
               <source src="/media/{{Lecture.video}}" type="video/mp4">
               <!-- <source src="movie.ogg" type="video/ogg"> --> 
-              Your browser does not support the video tag.
-            </video>
-            <!-- <iframe src="/media/{{Lecture.video}}" width="100%" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+              <!-- Your browser does not support the video tag.
+            </video> -->
+            <iframe src="/media/{{lecture.video}}" width="100%" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreencreen allowfullscreen></iframe>
             
             <!-- <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST"  >
             {% csrf_token %}
@@ -214,23 +231,15 @@
               <input type="range" id="rating" name="rating" min="1" max="5">
               <input type="submit">
             </form>  -->
-             <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST">
-                        {% csrf_token %}
-            <div class="form-group">
-                                    <label id="white" for="rating">Rating for the video</label>
-                                    <select class="form-control" id="rating" name="rating">
-                                        <option id="black">1</option>
-                                        <option id="black">2</option>
-                                        <option id="black">3</option>                      
-                                        <option id="black">4</option>             
-                                        <option id="black">5</option>
-                                    </select>
-                                </div>
-                                <div class="text-center">
-                                    <input style="font-weight:800;" class="text-center" id="commonbuttons" 
-                                        type="submit">
-                                </div>
-                    </form>
+            
+
+            <div class="row">
+              <div class="col ml-md-3"></div>
+                <a href="/media/{{lecture.material}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Open Reference Material</a>
+            </div>
+              </div>
+             
+            <br>
             <!-- {% csrf_token %} -->
             <!-- <form class="rating">
             <!-- <label for="rating">Rate the video </label> -->
@@ -274,11 +283,48 @@
             <!-- <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="next/">Next lecture</a>
             <br>
             <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="complete/">Completed this Lecture</a> -->
-            <a href="next/">Next</a>
+            <div class="row">
+              <div class="col ml-md-3 alignleft">
+                <a href="complete/" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Completed this Lecture</a>
+                </div>
+                 <div class="col ml-md-3 alignright mx-4">
+                <a href="next/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Next lecture</a>
+              </div>
+              <div style="clear: both;"></div>
+            </div>
             <br>
-            <a href="complete/">Completed this Lecture</a>
-</div>
- </div>
+
+            <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST">
+                        {% csrf_token %}
+            <div class="form-group">
+                                    <label id="white" for="rating">Rate this lecture</label>
+                                    <select class="form-control" id="rating" name="rating">
+                                        <option id="black">1</option>
+                                        <option id="black">2</option>
+                                        <option id="black">3</option>                      
+                                        <option id="black">4</option>             
+                                        <option id="black">5</option>
+                                    </select>
+                                </div>
+                                <div class="text-center">
+                                    <input style="font-weight:800;" class="text-center" id="commonbuttons" 
+                                        type="submit">
+                                </div>
+                    </form>
+            <!-- <div class="row">
+              <div class="col ml-md-3"> -->
+                <!-- <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div> -->
+                <!-- <a
+                            class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>Next videot</a>
+                <a href="next/">Next</a>
+              </div>
+            </div>
+            
+            <br>
+            <a href="complete/">Completed this Lecture</a> -->
+<!-- </div>
+ </div> -->
                 
            
             <footer class="bg-white sticky-footer">
