@@ -1,8 +1,8 @@
 
 
       // var subject =["Maths","Physics","Chemistry","English","Biology","Economics","History","Civics"]
-      var Progress = [,2,2.5,4,5,4,4,5]
-      var Month = ['JAN','FEB','MAR','APR','JUN','JULY',"AUG"]
+      var Progress = [,2,2.5,4,5,4,4]
+      var week = [1,2,3,4,5,6,7]
       // var John	=[ 55,	45,	56,	87,	21,	52,	89,	65]
       // var Suresh =[55,	64,	90,	61,	58,	2]
       // var Ramesh=[	25,	54,	89,	76	,95	,87	,56	,74]

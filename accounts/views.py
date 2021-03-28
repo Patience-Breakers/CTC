@@ -7,7 +7,7 @@ import requests
 # from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, auth
-from .models import Student, Teacher, Course, Lecture, Watch_time
+from .models import Student, Teacher, Course, Lecture, Watch_time,Todo
 from .forms import StudentForm
 # import collections
 from .models import Teacher
@@ -97,9 +97,13 @@ def allstudents(request):
     }
     return render(request, 'allstudents.html', context)
 
+def task(request,studentid,taskid):
+  task = Todo.objects.get(pk= taskid)
+  task.delete()
+  return redirect(openstudent, studentid=studentid)
 
 #open student aka dashboard
-def openstudent(request, studentid):    
+def openstudent(request, studentid): 
     student = Student.objects.get(pk=studentid)
     courses = student.courses.all()
     # lectids = []
@@ -138,13 +142,16 @@ def openstudent(request, studentid):
     # completed=[]
     # for course in courses:
     myfile = zip(mylist, courses)
+    tasks = Todo.objects.filter(student__pk=studentid)
     context = {
         'student': student,
         'myfile' : myfile,
         'mylist' : mylist,
         'courses':courses,
         'course':courses[0].course_name,
+        'course1':courses[1].course_name,
         'graphlist' : graphlist,
+        'tasks' : tasks,
     }
     return render(request, 'studentPage.html', context)
 

@@ -73,11 +73,14 @@ class Watch_time(models.Model):
   Rating =  models.IntegerField(default=0)
 
 
-# class Task(models.Model):
-#   student = models.ForeignKey(Student, on_delete=models.CASCADE, default="")
+class Todo(models.Model):
+  student = models.ForeignKey(Student, on_delete=models.CASCADE, default="")
+  task = models.CharField(default="NULL", max_length=100)
+  iscomplete = models.BooleanField(default=False)
 
 
-
+# class Todo(models.Model):
+  
 
 
 

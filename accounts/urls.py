@@ -28,6 +28,8 @@ urlpatterns = [
     # students courses
     path('students/<int:studentid>/courses/<int:courseid>/',
          views.openLectlistfromstudent, name='openLectlistfromstudent'),
+    path('students/<int:studentid>/done/<int:taskid>/',
+         views.task, name='task'),
     path('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/',
          views.openLecturefromstudent, name='openLecturefromstudent'),
     path('students/<int:studentid>/courses/<int:courseid>/lecture/<int:lectid>/next/',

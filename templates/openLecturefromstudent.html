@@ -1,106 +1,139 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Page - Brand</title>
- 	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Blank Page - Brand</title>
+	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
-  <style>
+	<style>
+		.margin-right {
+			margin-right: 400px;
+		}
 
-  .alignleft {
-  float: left;
-  width:33.33333%;
-  text-align:left;
-}
-.aligncenter {
-  float: left;
-  width:33.33333%;
-  text-align:center;
-}
-.alignright {
- float: left;
- width:33.33333%;
- text-align:right;
-}​
-    .rating {
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  font-size: 50px;
-}
+		#commonbuttons {
+			padding:5px;
+			border: none;
+			border-radius: 25px;
+			color: white;
+			font-size: 18px;
+			background: -webkit-linear-gradient(right, hsl(302, 97%, 46%), #6156f9e3);
+			width: 150px;
+			transition: all 0.3s ease-in;
+			border: none;
+		}
 
-.rating label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer;
-}
+		#commonbuttons:hover {
+		
+			border: none;
+			border-radius: 25px;
+			color: white;
+			font-size: 18px;
+			background: -webkit-linear-gradient(left, #1a129f, #6156f9e3);
+			width: 150px;
+			border-block-style: none;
+			border: none;
+			transform: scale(1.05);
+		}
+	</style>
+	<style>
+		.alignleft {
+			float: left;
+			width: 33.33333%;
+			text-align: left;
+		}
 
-.rating label:last-child {
-  position: static;
-}
+		.aligncenter {
+			float: left;
+			width: 33.33333%;
+			text-align: center;
+		}
 
-.rating label:nth-child(1) {
-  z-index: 5;
-}
+		.alignright {
+			float: left;
+			width: 33.33333%;
+			text-align: right;
+		}
 
-.rating label:nth-child(2) {
-  z-index: 4;
-}
+		​ .rating {
+			display: inline-block;
+			position: relative;
+			height: 50px;
+			line-height: 50px;
+			font-size: 50px;
+		}
 
-.rating label:nth-child(3) {
-  z-index: 3;
-}
+		.rating label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			cursor: pointer;
+		}
 
-.rating label:nth-child(4) {
-  z-index: 2;
-}
+		.rating label:last-child {
+			position: static;
+		}
 
-.rating label:nth-child(5) {
-  z-index: 1;
-}
+		.rating label:nth-child(1) {
+			z-index: 5;
+		}
 
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
+		.rating label:nth-child(2) {
+			z-index: 4;
+		}
 
-.rating label .icon {
-  float: left;
-  color: transparent;
-}
+		.rating label:nth-child(3) {
+			z-index: 3;
+		}
 
-.rating label:last-child .icon {
-  color: #000;
-}
+		.rating label:nth-child(4) {
+			z-index: 2;
+		}
 
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #09f;
-}
+		.rating label:nth-child(5) {
+			z-index: 1;
+		}
 
-.rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #09f;
-}
-</style>
+		.rating label input {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+		}
+
+		.rating label .icon {
+			float: left;
+			color: transparent;
+		}
+
+		.rating label:last-child .icon {
+			color: #000;
+		}
+
+		.rating:not(:hover) label input:checked~.icon,
+		.rating:hover label:hover input~.icon {
+			color: #09f;
+		}
+
+		.rating label input:focus:not(:checked)~.icon:last-child {
+			color: #000;
+			text-shadow: 0 0 5px #09f;
+		}
+	</style>
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+	<div id="wrapper">
+		<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+			<div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+				 href="#">
+					<div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -296,7 +329,8 @@
 
             <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST">
                         {% csrf_token %}
-            <div class="form-group">
+                       
+            <div class="form-group mx-5 margin-right">
                                     <label id="white" for="rating">Rate this lecture</label>
                                     <select class="form-control" id="rating" name="rating">
                                         <option id="black">1</option>
@@ -307,8 +341,8 @@
                                     </select>
                                 </div>
                                 <div class="text-center">
-                                    <input style="font-weight:800;" class="text-center" id="commonbuttons" 
-                                        type="submit">
+                                  <a  class="btn btn-success btn-lg active" role="button" aria-pressed="true">Rate</a>
+                                    
                                 </div>
                     </form>
             <!-- <div class="row">
