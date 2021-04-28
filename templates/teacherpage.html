@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+All courses - TSEC HACK COURSERA APP
+{% endblock %}
+
+{% block body %}
+
+<main class="page">
+    <section class="clean-block about-us">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">All Courses</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in,
+                    mattis vitae leo.</p>
+            </div>
+            <div class="row justify-content-center">
+                
+                <div class="col-sm-6 col-lg-4">
+                    <a href="/openCourse/{{course.pk}}" style="text-decoration: none; color :black;">
+                        <div class="card text-center clean-card">
+                            <img class="card-img-top w-100 d-block" src="/media/{{course.course_image}}">
+                            <div class="card-body info">
+                                <h4 class="card-title">{{course.course_name}}</h4>
+                                <p class="card-text">{{course.desc}}</p>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block js %}{% endblock %}

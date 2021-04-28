@@ -99,10 +99,23 @@ input [type="submit"] {
 										<h4 class="text-dark mb-4">Sign Up</h4>
 									</div>
 									<form action="/addstudent" method="POST" class="form-group">
-										{% csrf_token %}
-										<ul class="unordered-list">
-											{{ form.as_ul }}
-										</ul>
+                  {% csrf_token %}
+										<div class="form-group " >
+                                <label id="white" for="exampleFormControlInput1" >Product Name </label>
+                                <input type="text" name="productname" placeholder="productname"><br>
+                            </div>
+                            <div class="form-group " >
+                                <label id="white" for="exampleFormControlInput1" >Product Type </label>
+                                <input type="text" name="producttype" placeholder="producttype"><br>
+                            </div>
+                            <div class="form-group " >
+                                <label id="white" for="exampleFormControlInput1" >Product Price </label>
+                                <input type="text" name="productprice" placeholder="productprice"><br>
+                            </div>
+                            <div class="form-group " >
+                                <label id="white" for="exampleFormControlInput1" >Brand Name </label>
+                                <input type="text" name="brandname" placeholder="brandname"><br>
+                            </div>
 										<button class="btn btn-primary btn-block text-white btn-user"
                                             type="submit">Create Account</button>
                                     </form>
