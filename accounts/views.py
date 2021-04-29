@@ -11,7 +11,8 @@ from .models import Student, Teacher, Course, Lecture, Watch_time,Todo
 from .forms import StudentForm
 # import collections
 from .models import Teacher
-from django.db import connection
+# from django.db import connection
+import sqlite3
 
 def index(request):
     return render(request, 'index.html')
@@ -411,6 +412,16 @@ def addstudent(request):
           watch_object.student = user
           watch_object.w_lect = lecture
           watch_object.save()
+        connection = sqlite3.connect('db.sqlite3')
+        c = connection.cursor()
+        c.execute('''CREATE TRIGGER after_insert
+             AFTER INSERT ON accounts_student
+             BEGIN
+                 insert into log_file (table_accessed,date_of_access,type_trigger)
+                  values('student',getdate(),'after_insert');
+             END
+             ;
+             ''')
 
         return redirect('/')
     else:
