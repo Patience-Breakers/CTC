@@ -364,6 +364,22 @@ def addstudent(request):
         # check whether it's valid:
         if form.is_valid():
             form.save()
+            stu = Student()
+            stu.name = form.cleaned_data('name')
+            stu.username = form.cleaned_data('username')
+            stu.password = form.cleaned_data('password')
+            stu.email = form.cleaned_data('email')
+            stu.phone_no = form.cleaned_data('phone_no')
+            stu.image = form.cleaned_data('image')
+            stu.dob = form.cleaned_data('dob')
+            stu.CATEGORY = form.cleaned_data('CATEGORY')
+            stu.stud_category = form.cleaned_data('stud_category')
+            courses_id = form.cleaned_data('courses')
+            for course_id in courses_id:
+              cou=Course.objects.get(pk=course_id)
+              stu.courses.add(cou)
+            print(stu.name)
+            stu.save()
             return HttpResponseRedirect('/')
 
     # if a GET (or any other method) we'll create a blank form
