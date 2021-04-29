@@ -11,75 +11,84 @@
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
-  <style>
-    
-/*forms styling for the django automatic forms */
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="password"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="number"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
+	<style>
+		/*forms styling for the django automatic forms */
+		input[type="text"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
 
-input[type="email"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="checkbox"] {
-  /* width: 100%; */
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-ul.form-inline {
-  list-style-type: none;
-}
+		input[type="password"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
 
-ul.form-group {
-  list-style-type: none;
-}ul {
-  list-style-type: none;
-}
-@media (max-width: 999px) {
-  .block-to-disappear-in-mobile {
-    display: none;
-  }
-}
-label {
-  font-size: 18px;
-}
-input [type="submit"] {
-  font-size: 19px;
-}
-/******************************************/
-  </style>
+		input[type="number"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
+
+		input[type="email"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
+
+		input[type="checkbox"] {
+			/* width: 100%; */
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
+
+		ul.form-inline {
+			list-style-type: none;
+		}
+
+		ul.form-group {
+			list-style-type: none;
+		}
+
+		ul {
+			list-style-type: none;
+		}
+
+		@media (max-width: 999px) {
+			.block-to-disappear-in-mobile {
+				display: none;
+			}
+		}
+
+		label {
+			font-size: 18px;
+		}
+
+		input [type="submit"] {
+			font-size: 19px;
+		}
+
+		/******************************************/
+	</style>
 
 </head>
 
@@ -91,7 +100,8 @@ input [type="submit"] {
 					<div class="card-body p-0">
 						<div class="row">
 							<div class="col-lg-6 d-none d-lg-flex">
-								<div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;{% static 'dashboard/img/dogs/image3.jpeg' %}&quot;);"></div>
+								<div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;{% static 'dashboard/img/dogs/image3.jpeg' %}&quot;);">
+								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="p-5">
@@ -103,8 +113,7 @@ input [type="submit"] {
 										<ul class="unordered-list">
 											{{ form.as_ul }}
 										</ul>
-										<button class="btn btn-primary btn-block text-white btn-user"
-                                            type="submit">Create Account</button>
+										<input class="btn btn-block btn-red-block" type="submit">
                                     </form>
                                     <div class="text-center"><a class="small" href="/allstudents">Login</a></div>
                                 </div>

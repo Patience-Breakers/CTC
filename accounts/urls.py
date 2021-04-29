@@ -12,6 +12,7 @@ urlpatterns = [
     path("assignments/", views.assignments, name='assignments'),
     path("grades/", views.grades, name='grades'),
     path("teachers/", views.teachers, name='teachers'),
+    path("teacherlogin", views.teacherlogin, name='teacherlogin'),
     path("classnotes/", views.classnotes, name='classnotes'),
     path("search", views.crawler, name='crawler'),
 
@@ -21,11 +22,9 @@ urlpatterns = [
     path('openCourse/<int:courseid>/', views.openCourse, name='openCourse'),
 
     path("allstudents/", views.allstudents, name='allstudents'),
+    path('teacher/<int:teacherid>/', views.openteacher, name='openteacher'),
     path('students/<int:studentid>/', views.openstudent, name='openstudent'),
-    # path('teacher/<int:teacherid>/', views.teachercources, name='teachercources'),
     path('studentprofile/<int:studentid>/',views.studentprofile,name='studentprofile'),
-   
-    # students courses
     path('students/<int:studentid>/courses/<int:courseid>/',
          views.openLectlistfromstudent, name='openLectlistfromstudent'),
     path('students/<int:studentid>/done/<int:taskid>/',
