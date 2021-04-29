@@ -1,276 +1,187 @@
-<<<<<<< HEAD
 {% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Sign Up | Student</title>
-	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
-	<style>
-		/*forms styling for the django automatic forms */
-		input[type="text"],
-		select,
-		textarea {
-			width: 100%;
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			resize: vertical;
-		}
-
-		input[type="password"],
-		select,
-		textarea {
-			width: 100%;
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			resize: vertical;
-		}
-
-		input[type="number"],
-		select,
-		textarea {
-			width: 100%;
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			resize: vertical;
-		}
-
-		input[type="email"],
-		select,
-		textarea {
-			width: 100%;
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			resize: vertical;
-		}
-
-		input[type="checkbox"] {
-			/* width: 100%; */
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			resize: vertical;
-		}
-
-		ul.form-inline {
-			list-style-type: none;
-		}
-
-		ul.form-group {
-			list-style-type: none;
-		}
-
-		ul {
-			list-style-type: none;
-		}
-
-		@media (max-width: 999px) {
-			.block-to-disappear-in-mobile {
-				display: none;
-			}
-		}
-
-		label {
-			font-size: 18px;
-		}
-
-		input [type="submit"] {
-			font-size: 19px;
-		}
-
-		/******************************************/
-	</style>
-
-</head>
-
-<body class="bg-gradient-primary">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-9 col-lg-12 col-xl-10">
-				<div class="card shadow-lg o-hidden border-0 my-5">
-					<div class="card-body p-0">
-						<div class="row">
-							<div class="col-lg-6 d-none d-lg-flex">
-								<div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;{% static 'dashboard/img/dogs/image3.jpeg' %}&quot;);">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="p-5">
-									<div class="text-center">
-										<h4 class="text-dark mb-4">Sign Up</h4>
-									</div>
-									<form action="/addstudent" method="POST" class="form-group">
-										{% csrf_token %}
-										<ul class="unordered-list">
-											{{ form.as_ul }}
-										</ul>
-										<input class="btn btn-block btn-red-block" type="submit">
-                                    </form>
-                                    <div class="text-center"><a class="small" href="/allstudents">Login</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
-    <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/chart.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/bs-init.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="{% static 'dashboard/js/theme.js' %}"></script>
-</body>
-
-=======
-{% load static %}
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Sign Up | Student</title>
-	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
-	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Sign Up | Student</title>
+  <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+  <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
   <style>
-    
-/*forms styling for the django automatic forms */
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="password"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="number"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
+    /*forms styling for the django automatic forms */
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
 
-input[type="email"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-input[type="checkbox"] {
-  /* width: 100%; */
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-ul.form-inline {
-  list-style-type: none;
-}
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
 
-ul.form-group {
-  list-style-type: none;
-}ul {
-  list-style-type: none;
-}
-@media (max-width: 999px) {
-  .block-to-disappear-in-mobile {
-    display: none;
-  }
-}
-label {
-  font-size: 18px;
-}
-input [type="submit"] {
-  font-size: 19px;
-}
-/******************************************/
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    input[type="checkbox"] {
+      /* width: 100%; */
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    ul.form-inline {
+      list-style-type: none;
+    }
+
+    ul.form-group {
+      list-style-type: none;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    @media (max-width: 999px) {
+      .block-to-disappear-in-mobile {
+        display: none;
+      }
+    }
+
+    label {
+      font-size: 18px;
+    }
+
+    input [type="submit"] {
+      font-size: 19px;
+    }
+
+    /******************************************/
   </style>
 
 </head>
 
 <body class="bg-gradient-primary">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-9 col-lg-12 col-xl-10">
-				<div class="card shadow-lg o-hidden border-0 my-5">
-					<div class="card-body p-0">
-						<div class="row">
-							<div class="col-lg-6 d-none d-lg-flex">
-								<div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;{% static 'dashboard/img/dogs/image3.jpeg' %}&quot;);"></div>
-							</div>
-							<div class="col-lg-6">
-								<div class="p-5">
-									<div class="text-center">
-										<h4 class="text-dark mb-4">Sign Up</h4>
-									</div>
-									<form action="/addstudent" method="POST" class="form-group">
-                  {% csrf_token %}
-										<div class="form-group " >
-                                <label id="white" for="exampleFormControlInput1" >Product Name </label>
-                                <input type="text" name="productname" placeholder="productname"><br>
-                            </div>
-                            <div class="form-group " >
-                                <label id="white" for="exampleFormControlInput1" >Product Type </label>
-                                <input type="text" name="producttype" placeholder="producttype"><br>
-                            </div>
-                            <div class="form-group " >
-                                <label id="white" for="exampleFormControlInput1" >Product Price </label>
-                                <input type="text" name="productprice" placeholder="productprice"><br>
-                            </div>
-                            <div class="form-group " >
-                                <label id="white" for="exampleFormControlInput1" >Brand Name </label>
-                                <input type="text" name="brandname" placeholder="brandname"><br>
-                            </div>
-										<button class="btn btn-primary btn-block text-white btn-user"
-                                            type="submit">Create Account</button>
-                                    </form>
-                                    <div class="text-center"><a class="small" href="/allstudents">Login</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-9 col-lg-12 col-xl-10">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-flex">
+                <div class="flex-grow-1 bg-login-image"
+                  style="background-image: url(&quot;{% static 'dashboard/img/dogs/image3.jpeg' %}&quot;);"></div>
+              </div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h4 class="text-dark mb-4">Sign Up</h4>
+                  </div>
+                  <form action="/addstudent" method="POST" class="form-group">
+                    {% csrf_token %}
+                    <!--todo
+                      
+                      Name:
+
+Username:
+
+Password:
+
+Email:
+
+Phone no:
+
+Image:
+Change: No file chosen
+
+Stud category:
+Courses: -->
+                    <label for="name" class="form-label">Name</label>
+                    <input style="margin-bottom: 2%;" name="name" type="text" id="name" for="name" class="form-control"
+                      aria-describedby="passwordHelpBlock">
+
+                    <label for="Username" class="form-label">Username</label>
+                    <input style="margin-bottom: 2%;" name="Username" type="text" id="Username" for="Username"
+                      class="form-control" aria-describedby="passwordHelpBlock">
+
+                    <label for="email" class="form-label">Email</label>
+                    <input style="margin-bottom: 2%;" name="email" type="email" id="email" for="email"
+                      class="form-control" aria-describedby="passwordHelpBlock">
+
+                    <label for="password" class="form-label">Password</label>
+                    <input style="margin-bottom: 2%;" name="password" type="password" id="password" for="password"
+                      class="form-control" aria-describedby="passwordHelpBlock">
+
+                    <label for="phone" class="form-label">Phone</label>
+                    <input style="margin-bottom: 2%;" name="phone" type="text" id="phone" for="phone"
+                      class="form-control" aria-describedby="passwordHelpBlock">
+
+                    <label for="stud_category">Student Category</label>
+                    <select style="margin-bottom: 2%;" name="stud_category" id="stud_category">
+                      <option value="U" selected>Under Grad</option>
+                      <option value="P">Post Grad</option>
+                      <option value="H">High School</option>
+                      <option value="O">Others</option>
+                    </select>
+
+                    <label for="courses">Courses</label>
+                    <select name="courses" id="courses" multiple>
+                      <option value="1">Introduction to Machine Learning</option>
+                      <option value="2">Cloud Computing</option>
+                    </select>
+                    <p>Use Ctrl to multiple select the courses.</p>
+
+
+
+                    <button class="btn btn-primary btn-block text-white btn-user" type="submit">Create Account</button>
+                  </form>
+                  <div class="text-center"><a class="small" href="/allstudents">Login</a></div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
-    <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/chart.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/bs-init.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="{% static 'dashboard/js/theme.js' %}"></script>
+  </div>
+  <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+  <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'dashboard/js/chart.min.js' %}"></script>
+  <script src="{% static 'dashboard/js/bs-init.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+  <script src="{% static 'dashboard/js/theme.js' %}"></script>
 </body>
 
->>>>>>> origin/master
 </html>

@@ -104,12 +104,10 @@ def handlelogin(request):
     return render(request, 'login.html')
 
 def openteacher(request, teacherid): 
-    # course = Course.objects.get(pk=courseid)
-    # myteacher = Teacher.objects.get(course__pk=courseid)
-    # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
-    # teacher = Teacher.objects.get(pk=teacherid)
-    myteacher = Teacher.objects.get(pk=teacherid)
+  
+    myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE id = %s', [teacherid])
     course = Course.objects.get(pk=myteacher.course.pk)
+    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id = %s',[myteacher.course__pk])
     print(course.course_name)
     context ={
       'course':course,
@@ -176,7 +174,7 @@ def openstudent(request, studentid):
         'mylist' : mylist,
         'courses':courses,
         'course':courses[0].course_name,
-        'course1':courses[1].course_name,
+        # 'course1':courses[1].course_name,
         'graphlist' : graphlist,
         'tasks' : tasks,
     }
@@ -195,8 +193,14 @@ def openLectlistfromstudent(request, studentid, courseid):
     course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id=%s',[courseid])[0]
     myteacher = Teacher.objects.get(course__pk=courseid)
     # myteacher = Teacher.objects.raw('SELECT')
-    lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid)
+    #####sk
+    ####
+    lectures = Lecture.objects.raw('SELECT * FROM accounts_lecture where teacher_id=%s',[myteacher.teacher_id])
+    ##
+    #lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    ##
+    mywatch_time = Watch_time.objects.raw('SELECT * FROM accounts_watch_time where student_id=%s',[studentid])
+    #mywatch_time = Watch_time.objects.filter(student__pk=studentid)
     lectids = []
     for lect in lectures:
         lectids.append(lect.pk)
@@ -206,13 +210,23 @@ def openLectlistfromstudent(request, studentid, courseid):
             watchtimelist.append(watch)
 
     mylist = zip(lectures, watchtimelist)
+    ##  Students.objects.raw('SELECT * FROM accounts_student where student_id=%s',[studentid])
     context = {
         # 'lectures' :lectures,
         'mylist': mylist,
-        'student' : Student.objects.get(pk=studentid),
+        'student' : Student.objects.raw('SELECT * FROM accounts_student where student_id=%s',[studentid]),
         'studentid': studentid,
         'course': course,
     }
+
+    
+    # context = {
+    #     # 'lectures' :lectures,
+    #     'mylist': mylist,
+    #     'student' : Student.objects.get(pk=studentid),
+    #     'studentid': studentid,
+    #     'course': course,
+    # }
 
     for i in watchtimelist:
         print("#####################", i.completed,i.student, "#####################")
@@ -235,18 +249,18 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
         return redirect(openLecturefromstudent, studentid=studentid,courseid=courseid,
                     lectid=lectid)
     else:
-        myteacher = Teacher.objects.get(course__pk=courseid)
-        lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(
-            pk=lectid)
+        # myteacher = Teacher.objects.get(course__pk=courseid)
+        myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id = %s',[courseid])[0]
+        # lecture = Lecture.objects.filter(teacher__pk=myteacher.pk).get(pk=lectid)
+        lecture = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE teacher_id = %s AND lec_id = %s',[myteacher.pk, lectid])[0]
         # course = Course.objects.get(pk=courseid)
         course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id=%s',[courseid])[0]
         # student = Student.objects.get(pk=studentid)
         student = Student.objects.raw('SELECT * FROM accounts_student WHERE student_id=%s',[studentid])[0]
         # lecture = Lecture.objects.get(pk=lectid)
-        lecture = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE lec_id=%s',[lectid])[0]
-        
-        mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
-            w_lect__pk=lectid)
+        lecture = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE lec_id=%s',[lectid])[0]        
+        # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
+        mywatch_time = Watch_time.objects.raw('SELECT * FROM accounts_watch_time WHERE student_id = %s AND w_lect_id = %s',[studentid,lectid])
        
 
         # iscomplete = mywatch_time.completed
@@ -261,11 +275,12 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
 
 
 def nextlect(request, studentid, courseid, lectid):
-
-    course = Course.objects.get(pk=courseid)
-    course = Course
-    myteacher = Teacher.objects.get(course__pk=courseid)
-    lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    # course = Course.objects.get(pk=courseid)
+    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id=%s',[courseid])
+    # myteacher = Teacher.objects.get(course__pk=courseid)
+    myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id=%s',[courseid])[0]
+    # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    lectures = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE teacher_id=%s',[myteacher.teacher_id])
     # mywatch_time = Watch_time.objects.filter(student__pk=studentid)
     new_lecture = None
     flag = 0
@@ -291,8 +306,8 @@ def nextlect(request, studentid, courseid, lectid):
                     courseid=courseid)
 
 def complete(request, studentid, courseid, lectid):
-    mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(
-        w_lect__pk=lectid)
+    # mywatch_time = Watch_time.objects.filter(student__pk=studentid).filter(w_lect__pk=lectid)
+    mywatch_time = Watch_time.objects.raw('SELECT * FROM accounts_watch_time WHERE student_id = %s AND w_lect_id = %s',[studentid,lectid])       
 
     for watch in mywatch_time:
       watch.completed='True'
@@ -305,8 +320,10 @@ def complete(request, studentid, courseid, lectid):
 
 
 def openCourse(request, courseid):
-    myteacher = Teacher.objects.get(course__pk = courseid)
-    lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    # myteacher = Teacher.objects.get(course__pk = courseid)
+    myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id=%s',[courseid])[0]
+    # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+    lectures = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE teacher_id=%s',[myteacher.teacher_id])
     context = {'lectures': lectures,
                 'teacher' : myteacher.teacher_name}
     return render(request, 'coursePage.html', context)
@@ -320,14 +337,17 @@ def viewallcourses(request):
     courses = Course.objects.all()
     mylist=[]
     for course in courses :      
-        myteacher = Teacher.objects.get(course__pk=course.pk)
-        lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+        # myteacher = Teacher.objects.get(course__pk=course.pk)
+        myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id=%s',[course.course_id])[0]
+        # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+        lectures = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE teacher_id=%s',[myteacher.teacher_id])
         lect_counter = 0
         watch_counter=0
         rating = 0
         for lect in lectures:
           lect_counter+=1
-          mywatch_time = Watch_time.objects.filter(w_lect__pk=lect.pk)
+          # mywatch_time = Watch_time.objects.filter(w_lect__pk=lect.pk)
+          mywatch_time = Watch_time.objects.raw('SELECT * FROM accounts_watch_time WHERE w_lect_id=%s',[lect.lec_id])
           watch_counter=0
           for watch in mywatch_time:           
             if watch.completed==True:
@@ -355,38 +375,46 @@ def studentprofile(request, studentid):
       return render(request, 'student_profile.html', context)
 
 
-
 def addstudent(request):
-    # if we get POST method, we will use this
     if request.method == 'POST':
-        form = StudentForm(request.POST)
-        print("hello\n\n\n---\n\n\n\n\n---------------\n\n\n\n\n\n---\n\n")
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            stu = Student()
-            stu.name = form.cleaned_data('name')
-            stu.username = form.cleaned_data('username')
-            stu.password = form.cleaned_data('password')
-            stu.email = form.cleaned_data('email')
-            stu.phone_no = form.cleaned_data('phone_no')
-            stu.image = form.cleaned_data('image')
-            stu.dob = form.cleaned_data('dob')
-            stu.CATEGORY = form.cleaned_data('CATEGORY')
-            stu.stud_category = form.cleaned_data('stud_category')
-            courses_id = form.cleaned_data('courses')
-            for course_id in courses_id:
-              cou=Course.objects.get(pk=course_id)
-              stu.courses.add(cou)
-            print(stu.name)
-            stu.save()
-            return HttpResponseRedirect('/')
 
-    # if a GET (or any other method) we'll create a blank form
+        name = request.POST.get('name')
+        phone_no = request.POST.get('phone')
+        username = request.POST.get('Username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        stud_category = request.POST.get('stud_category')
+        courses = request.POST.get('courses')
+        image_str = 'course-images/blogimg1.png'
+        # for course in courses:
+        print("###########",courses)
+        user = Student(
+            name=name,
+            phone_no=phone_no,
+            username=username,
+            password=password,
+            email=email,
+            stud_category=stud_category,
+            image= image_str
+            )
+        user.save()
+        # Student.objects.raw('Insert into accounts_student VALUES(%s,%s,%s,'ask','ask@gmail.com',5896412589,'course-images/blogimg1.png','2020-08-02','U')')
+        # for course in courses:
+        p1=Course.objects.get(course_id=courses)
+        user.courses.add(p1)
+        user.save()
+        myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id=%s',[courses])[0]
+        # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
+        lectures = Lecture.objects.raw('SELECT * FROM accounts_lecture WHERE teacher_id=%s',[myteacher.teacher_id])
+        for lecture in lectures:
+          watch_object= Watch_time()
+          watch_object.student = user
+          watch_object.w_lect = lecture
+          watch_object.save()
+
+        return redirect('/')
     else:
-        form = StudentForm()
-        return render(request, 'addstudent.html', {'form': form})
-
+        return render(request, 'addstudent.html')
 
 # def addstudent(request):
 #     # if we get POST method, we will use this
