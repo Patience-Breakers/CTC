@@ -261,7 +261,7 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
 
 
 def nextlect(request, studentid, courseid, lectid):
-    ###akshata kar rahi hai###
+
     course = Course.objects.get(pk=courseid)
     course = Course
     myteacher = Teacher.objects.get(course__pk=courseid)
@@ -364,7 +364,8 @@ def addstudent(request):
         # check whether it's valid:
         if form.is_valid():
             form.save()
-            return render(request, 'addstudent.html', {'form': form})
+            return HttpResponseRedirect('/')
+
     # if a GET (or any other method) we'll create a blank form
     else:
         form = StudentForm()
