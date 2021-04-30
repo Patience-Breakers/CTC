@@ -105,10 +105,9 @@ def handlelogin(request):
     return render(request, 'login.html')
 
 def openteacher(request, teacherid): 
-  
     myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE id = %s', [teacherid])
-    course = Course.objects.get(pk=myteacher.course.pk)
-    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id = %s',[myteacher.course__pk])
+    # course = Course.objects.get(pk=myteacher.course.pk)
+    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id = %s',[myteacher.course__pk])[0]
     print(course.course_name)
     context ={
       'course':course,
@@ -128,10 +127,17 @@ def allstudents(request):
 
 def task(request, studentid, taskid):
     #   task = Todo.objects.get(pk= taskid)
-    task = Todo.objects.raw('SELECT * FROM accounts_todo WHERE id = %d', [taskid])
+    task = Todo.objects.raw('SELECT * FROM accounts_todo WHERE id = %s', [taskid])[0]
     task.delete()
     return redirect(openstudent, studentid=studentid)
 
+def addtodo(request,studentid):
+    todo_obj = Todo()
+    todo_obj.student=Student.objects.raw('SELECT * FROM accounts_student WHERE student_id=%s',[studentid])[0]
+    todo_obj.task= request.POST['query']
+    todo_obj.save()
+    return redirect(openstudent,studentid=studentid)
+    
 #open student aka dashboard
 def openstudent(request, studentid): 
     # student = Student.objects.get(pk=studentid)
@@ -277,7 +283,7 @@ def openLecturefromstudent(request, studentid, courseid, lectid):
 
 def nextlect(request, studentid, courseid, lectid):
     # course = Course.objects.get(pk=courseid)
-    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id=%s',[courseid])
+    course = Course.objects.raw('SELECT * FROM accounts_course WHERE course_id=%s',[courseid])[0]
     # myteacher = Teacher.objects.get(course__pk=courseid)
     myteacher = Teacher.objects.raw('SELECT * FROM accounts_teacher WHERE course_id=%s',[courseid])[0]
     # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
@@ -412,16 +418,16 @@ def addstudent(request):
           watch_object.student = user
           watch_object.w_lect = lecture
           watch_object.save()
-        connection = sqlite3.connect('db.sqlite3')
-        c = connection.cursor()
-        c.execute('''CREATE TRIGGER after_insert
-             AFTER INSERT ON accounts_student
-             BEGIN
-                 insert into log_file (table_accessed,date_of_access,type_trigger)
-                  values('student',getdate(),'after_insert');
-             END
-             ;
-             ''')
+        # connection = sqlite3.connect('db.sqlite3')
+        # c = connection.cursor()
+        # c.execute('''CREATE TRIGGER after_insert
+        #      AFTER INSERT ON accounts_student
+        #      BEGIN
+        #          insert into log_file (table_accessed,date_of_access,type_trigger)
+        #           values('student',getdate(),'after_insert');
+        #      END
+        #      ;
+        #      ''')
 
         return redirect('/')
     else:

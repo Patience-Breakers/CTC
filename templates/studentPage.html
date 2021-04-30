@@ -4,17 +4,16 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>
-        {{student.name}} | Dashboard
-    </title>
-    <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">   
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>
+		{{student.name}} | Dashboard
+	</title>
+	<link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
 
 </head>
 
@@ -23,14 +22,13 @@
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Doctor</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Delete Doctor</h5>
+					<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -227,7 +225,7 @@
                     </div>
 
                     <div class="row">
-                      
+
                         {% for mylist,course in myfile %}
                         <div class="col-md-6 col-xl-3 mb-4">
                             <a href="courses/{{ course.pk }}" style="text-decoration: none; color :black;">
@@ -238,7 +236,7 @@
                                             <div class="col mr-2">
                                                 <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
                                                     <span id="course_name">{{course.course_name}}</span>
-                                                   
+
                                                 </div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
@@ -311,127 +309,156 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h6 class="text-primary font-weight-bold m-0">Hours Spent On</h6>
-                               
+
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
-                                       <!--todo added the script tag here so that I can render the site fast-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
-            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
-            crossorigin="anonymous"></script>
-                                      <canvas id="myaChart" width="40px" height="40px"></canvas>
-                  <script>
-                        var ctx = document.getElementById('myaChart').getContext('2d');
-                        ctx.canvas.parentNode.style.width = "350px";
-                        ctx.canvas.parentNode.style.height = "350px";
+                                        <!--todo added the script tag here so that I can render the site fast-->
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+                                            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+                                            crossorigin="anonymous"></script>
+                                        <canvas id="myaChart" width="40px" height="40px"></canvas>
+                                        <script>
+                                            var ctx = document.getElementById('myaChart').getContext('2d');
+                                            ctx.canvas.parentNode.style.width = "350px";
+                                            ctx.canvas.parentNode.style.height = "350px";
 
-                        width = screen.width;
-                        if (width < 600) {
-                            ctx.canvas.parentNode.style.width = "300px";
-                            ctx.canvas.parentNode.style.height = "300px";
-                        }
-                        var myChart = new Chart(ctx, {
-                            type: 'pie',
-                            data: {
-                                labels: [
-                                {% for course in courses %}
+                                            width = screen.width;
+                                            if (width < 600) {
+                                                ctx.canvas.parentNode.style.width = "300px";
+                                                ctx.canvas.parentNode.style.height = "300px";
+                                            }
+                                            var myChart = new Chart(ctx, {
+                                                type: 'pie',
+                                                data: {
+                                                    labels: [
+                                                        {% for course in courses %}
                                
                                   '{{course.course_name}}',
                                  {% endfor %}      
                     ],
-                        datasets: [{
-                            label: '# of Votes',
+                                            datasets: [{
+                                                label: '# of Votes',
 
-                            data: [
-                                {% for list in graphlist %}
-                           {{list}},
-                        {% endfor %}
+                                                data: [
+                                                    {% for list in graphlist %}
+                           {{ list }},
+                                            {% endfor %}
 
 
-                        ],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
+                                            ],
+                                                backgroundColor: [
+                                                    'rgba(255, 99, 132, 0.2)',
+                                                    'rgba(54, 162, 235, 0.2)',
+                                                    'rgba(255, 206, 86, 0.2)',
+                                                    'rgba(75, 192, 192, 0.2)',
+                                                    'rgba(153, 102, 255, 0.2)',
+                                                    'rgba(255, 159, 64, 0.2)'
+                                                ],
+                                                    borderColor: [
+                                                        'rgba(255, 99, 132, 1)',
+                                                        'rgba(54, 162, 235, 1)',
+                                                        'rgba(255, 206, 86, 1)',
+                                                        'rgba(75, 192, 192, 1)',
+                                                        'rgba(153, 102, 255, 1)',
+                                                        'rgba(255, 159, 64, 1)'
+                                                    ],
+                                                        borderWidth: 1
                     }]
                 },
-                        options: {
-                            scales: {
+                                            options: {
+                                                scales: {
 
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }, scales: false,
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }, scales: false,
 
                 }
             });
-                    </script>
+                                        </script>
                                     </div>
 
-                                 
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 mb-4">
-                            
+
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Todo List</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3 class="text-primary font-weight-bold m-0">Todo List </h6>
+                                        </div>
+                                        <div class="col ">
+                                            <form action='/addtodo/{{student.pk}}/' method="POST"
+                                                class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                                {% csrf_token %}
+<div class="input-group">
+
+    <input name="query" id="query" for="query" class="bg-light form-control border-0 small" type="text"
+        placeholder="Add task">
+    <div class="input-group-append">
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary py-0" type="submit">
+            <i class="fas fa-add"></i>
+        </button>
+    </div>
+</div>
+
+                                            </form>
+
+
+                                        </div>
+
+                                    </div>
+
+
+
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <form action="/student/{{student.pk}}" method ="POST">
-                                    {% for task in tasks %}
-                                    {% csrf_token %}
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center no-gutters">
-                                             <div class="col mr-2">
-                                                <h6 class="mb-0"><strong> <label for="{{task.pk}}">{{task.task}}</label></strong></h6>
-                                            </div>
-                                            <div class="card-header py-3">
-                                      <a href="done/{{task.pk}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Done Tasks</a>
-                                      
-                                    </div>
-                                    </li> 
+                                    <form action="/student/{{student.pk}}" method="POST">
+                                        {% for task in tasks %}
+                                        {% csrf_token %}
+                                        <li class="list-group-item">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 class="mb-0"><strong> <label
+                                                                for="{{task.pk}}">{{task.task}}</label></strong></h6>
+                                                </div>
+                                                <div class="card-header py-3">
+                                                    <a href="done/{{task.pk}}" class="btn btn-primary btn-lg active"
+                                                        role="button" aria-pressed="true">Done Tasks</a>
 
-                                    {% endfor %}
-                                      
-                                    </div>
-                                        
-                                    
-                                    </form>
-                             
-                                    
-                                </ul>
+                                                </div>
+                                        </li>
+
+                                        {% endfor %}
+
                             </div>
+
+
+                            </form>
+
+
+                            </ul>
                         </div>
-                       
                     </div>
+
                 </div>
             </div>
-            </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+        </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
     <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -449,12 +476,12 @@
             // a=element.val();
             // console.log(element);
             // m=a.toString();
-            
-           
+
+
             doc.text('Courses Enrolled', 10, 10);
 
             doc.text('{{course}}', 20, 20);
-             doc.text('{{course1}}', 20, 30);
+            doc.text('{{course1}}', 20, 30);
             // doc.text(m, 10, 10);
             doc.save('a4.pdf');
         }

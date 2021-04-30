@@ -24,6 +24,7 @@ urlpatterns = [
     path("allstudents/", views.allstudents, name='allstudents'),
     path('teacher/<int:teacherid>/', views.openteacher, name='openteacher'),
     path('students/<int:studentid>/', views.openstudent, name='openstudent'),
+    path('addtodo/<int:studentid>/', views.addtodo, name='addtodo'),
     path('studentprofile/<int:studentid>/',views.studentprofile,name='studentprofile'),
     path('students/<int:studentid>/courses/<int:courseid>/',
          views.openLectlistfromstudent, name='openLectlistfromstudent'),
