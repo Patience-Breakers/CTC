@@ -418,16 +418,6 @@ def addstudent(request):
           watch_object.student = user
           watch_object.w_lect = lecture
           watch_object.save()
-        # connection = sqlite3.connect('db.sqlite3')
-        # c = connection.cursor()
-        # c.execute('''CREATE TRIGGER after_insert
-        #      AFTER INSERT ON accounts_student
-        #      BEGIN
-        #          insert into log_file (table_accessed,date_of_access,type_trigger)
-        #           values('student',getdate(),'after_insert');
-        #      END
-        #      ;
-        #      ''')
 
         return redirect('/')
     else:
