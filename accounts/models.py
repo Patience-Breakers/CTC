@@ -89,3 +89,5 @@ class Todo(models.Model):
 class Logs(models.Model):
     student_id = models.IntegerField(primary_key=True)
     edit_time = models.DateField(auto_now=False, auto_now_add=False)
+
+

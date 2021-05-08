@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="home"),
+    path('newcourses/', views.newcourses, name="newcourses"),
     path('blank', views.blank, name="home"),
     path('login', views.handlelogin, name="handlelogin"),
     path('logout', views.handlelogout, name="handlelogout"),
@@ -16,7 +17,7 @@ urlpatterns = [
     path("classnotes/", views.classnotes, name='classnotes'),
     path("search", views.crawler, name='crawler'),
 
-    path('addstudent',views.addstudent,name="addstudent"),
+    path('addstudent', views.addstudent, name="addstudent"),
 
     path("allcourses/", views.viewallcourses, name='allcourses'),
     path('openCourse/<int:courseid>/', views.openCourse, name='openCourse'),
@@ -25,7 +26,8 @@ urlpatterns = [
     path('teacher/<int:teacherid>/', views.openteacher, name='openteacher'),
     path('students/<int:studentid>/', views.openstudent, name='openstudent'),
     path('addtodo/<int:studentid>/', views.addtodo, name='addtodo'),
-    path('studentprofile/<int:studentid>/',views.studentprofile,name='studentprofile'),
+    path('studentprofile/<int:studentid>/',
+         views.studentprofile, name='studentprofile'),
     path('students/<int:studentid>/courses/<int:courseid>/',
          views.openLectlistfromstudent, name='openLectlistfromstudent'),
     path('students/<int:studentid>/done/<int:taskid>/',

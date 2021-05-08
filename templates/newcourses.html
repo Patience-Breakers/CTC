@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+All courses - TSEC HACK COURSERA APP
+{% endblock %}
+
+{% block body %}
+
+<main class="page">
+    <section class="clean-block about-us">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">New Courses</h2>
+
+            </div>
+            <div class="row justify-content-center">
+                <ul class="list-group" style="list-style: none;">
+                    {% for i in courses %}
+                    <li>{{i.course_name}}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block js %}{% endblock %}
