@@ -9,7 +9,6 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="shortcut icon"
         href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png" />
-
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="{% static 'fonts/simple-line-icons.min.css' %}">
@@ -39,48 +38,33 @@
                             All Teachers
                         </a>
                     </li>
-
-
-
                     <div class="dropdown">
                         <li type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                             Login
                         </li>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <a href="/allstudents">
+                            <a href="/allstudents" style="text-decoration: none;">
                                 <li>
                                     <button class="dropdown-item" type="button">Student Login</button>
                                 </li>
                             </a>
-
-                            <a href="/teacherlogin" >
+                            <a href="/teacherlogin" style="text-decoration: none;">
                                 <li>
                                     <button class="dropdown-item" type="button">Teacher Login</button>
                                 </li>
                             </a>
-
-                            <a href="/addstudent">
+                            <a href="/addstudent" style="text-decoration: none;">
                                 <li>
                                     <button class="dropdown-item" type="button">Student SignUp</button>
                                 </li>
                             </a>
-
                         </ul>
                     </div>
-
-                  
-
-
-
-
-
                 </ul>
             </div>
         </div>
     </nav>
-
     {% block body %}{% endblock %}
-
     <footer class="page-footer dark">
         <div class="container">
             <div class="row">
@@ -127,7 +111,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="{% static 'js/smoothproducts.min.js' %}"></script>
     <script src="{% static 'js/theme.js' %}"></script>
-
     {% block js %}{% endblock %}
 </body>
 
