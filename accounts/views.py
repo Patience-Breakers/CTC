@@ -153,7 +153,9 @@ def addtodo(request, studentid):
     todo_obj.save()
     return redirect(openstudent, studentid=studentid)
 
-# open student aka dashboard
+# todo open student aka dashboard
+# todo -------------------------------------------------------------------
+# todo -------------------------------------------------------------------
 
 
 def openstudent(request, studentid):
@@ -208,6 +210,10 @@ def openstudent(request, studentid):
         'tasks': tasks,
     }
     return render(request, 'studentPage.html', context)
+
+# todo -------------------------------------------------------------------
+# todo -------------------------------------------------------------------
+# todo -------------------------------------------------------------------
 
 
 def handlelogout():
@@ -501,5 +507,3 @@ def newcourses(request):
         'courses': all_courses,
     }
     return render(request, 'newcourses.html', context)
-
-
