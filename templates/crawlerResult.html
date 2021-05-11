@@ -1,15 +1,18 @@
-{% extends 'base2.html' %} 
+{% extends 'base2.html' %}
 {% load static %}
 
-{% block title %} {% endblock %}
+{% block title %}
+crawler result page
+{% endblock %}
 
 
 {% block body %}
 {% for result in results %}
 <div class="container">
-<a href="{{result}}" >{{result}}</a><br>
-<iframe src="{{result}}" height="300px" width="100%"></iframe>
-<br></div>
+    <a href="{{result}}">{{result}}</a><br>
+    <iframe src="{{result}}" height="300px" width="100%"></iframe>
+    <br>
+</div>
 {% endfor %}
 
 
