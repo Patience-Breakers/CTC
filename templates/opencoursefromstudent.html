@@ -8,7 +8,6 @@
     <title>Course Page | {{course.course_name}}</title>
     <link rel="shortcut icon"
         href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png" />
-
     <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -18,7 +17,6 @@
 </head>
 
 <body id="page-top">
-
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a
@@ -35,7 +33,6 @@
                                 class="fas fa-user-circle"></i><span>Teachers</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/allcourses"><i
                                 class="fas fa-table"></i><span>Courses</span></a></li>
-
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                         id="sidebarToggle" type="button"></button></div>
@@ -188,13 +185,9 @@
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Course : {{course.course_name}}</h3>
                     <div class="card shadow">
-
                         <div class="card-body">
-
                             <div class="table-responsive table mt-2" id="dataTable" role="grid"
                                 aria-describedby="dataTable_info">
-
-
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
@@ -204,53 +197,40 @@
                                             <th>Lecture Date</th>
                                             <th>Status</th>
                                             <th>Completed on</th>
-
                                             <!-- <th>Lecturer</th>
                                             <th></th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {% for lecture,watchtime in mylist %}
-                                        <tr>
-
-
-                                            <td><img class="rounded-circle mr-2" width="150" height="150"
-                                                    src="/media/{{lecture.thumbnail}}"></td>
-
-                                            <td> <a href="lecture/{{lecture.pk}}"> {{lecture.lecture_name}}
-                                                </a></td>
-
-                                            <td>{{lecture.lec_no}}</td>
-
-                                            <td>{{lecture.lec_date}}<br></td>
-                                            <td>{% if watchtime.completed %}
-                                                <p> Completed </p>
-                                                {% else %}
-                                                <p> Not Started </p>
-                                                {% endif %}
-                                            </td>
-
-                                            <td>{% if watchtime.completed %}
-                                                <p> {{watchtime.completed_date}} </p>
-                                                {% else %}
-                                                <p> --- </p>
-                                                {% endif %}
-                                            </td>
-                                            <!-- <td>{{watchtime.completed_date}}</td> -->
-
-                                        </tr>
+                                        <a href="lecture/{{lecture.pk}}" style="text-decoration:none;">
+                                            <tr>
+                                                <td><img class="rounded-circle mr-2" width="150" height="150"
+                                                        src="/media/{{lecture.thumbnail}}"></td>
+                                                <td>
+                                                    {{lecture.lecture_name}}
+                                                </td>
+                                                <td>{{lecture.lec_no}}</td>
+                                                <td>{{lecture.lec_date}}<br></td>
+                                                <td>{% if watchtime.completed %}
+                                                    <p> Completed </p>
+                                                    {% else %}
+                                                    <p> Not Started </p>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{% if watchtime.completed %}
+                                                    <p> {{watchtime.completed_date}} </p>
+                                                    {% else %}
+                                                    <p> --- </p>
+                                                    {% endif %}
+                                                </td>
+                                                <!-- <td>{{watchtime.completed_date}}</td> -->
+                                            </tr>
+                                        </a>
                                         {% endfor %}
-
                                     </tbody>
-
                                 </table>
-
-
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -262,10 +242,10 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="[% static 'dashboard/js/jquery.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
     <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'dashboard/js/chart.min.js' %}"></script>
-    <script src={% static '"dashboard/js/bs-init.js' %}"></script>
+    <script src="{% static 'dashboard/js/bs-init.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="{% static 'dashboard/js/theme.js' %}"></script>
 </body>
