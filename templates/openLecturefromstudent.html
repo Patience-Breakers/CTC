@@ -134,73 +134,23 @@
                             {{lecture.lecture_name}}</h6>
 
                     </div>
-                    <!-- <video width="100%" height="600px" controls>
-              <source src="/media/{{Lecture.video}}" type="video/mp4">
-              <!-- <source src="movie.ogg" type="video/ogg"> -->
-                    <!-- Your browser does not support the video tag.
-            </video> -->
+
                     <iframe src="/media/{{lecture.video}}" width="100%" height="600px" frameborder="0"
                         webkitallowfullscreen mozallowfullscreencreen allowfullscreen></iframe>
 
-                    <!-- <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST"  >
-            {% csrf_token %}
-              <label for="rating">Rate the video </label>
-              <input type="range" id="rating" name="rating" min="1" max="5">
-              <input type="submit">
-            </form>  -->
+
 
 
                     <div class="row">
                         <div class="col ml-md-3"></div>
-                        <a href="/media/{{lecture.material}}" class="btn btn-primary btn-lg active" role="button"
-                            aria-pressed="true">Open Reference Material</a>
+                        <a href="/media/{{lecture.material}}" target="_blank" class="btn btn-primary btn-lg active"
+                            role="button" aria-pressed="true">Open Reference Material</a>
                     </div>
                 </div>
 
                 <br>
-                <!-- {% csrf_token %} -->
-                <!-- <form class="rating">
-            <!-- <label for="rating">Rate the video </label> -->
-                <!-- <label>
-              <input type="radio" name="stars" value="1" />
-              <span class="icon">★</span>
-              <br>
-            </label>
-            <label>
-              <input type="radio" name="stars" value="2" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <br>
-            </label>
-            <label>
-              <input type="radio" name="stars" value="3" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span> 
-              <br>  
-            </label>
-            <label>
-              <input type="radio" name="stars" value="4" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <br>
-            </label>
-            <label>
-              <input type="radio" name="stars" value="5" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <br>
-            </label>
-          </form> -->
 
-                <!-- <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="next/">Next lecture</a>
-            <br>
-            <class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="complete/">Completed this Lecture</a> -->
+
                 <div class="row">
                     <div class="col ml-md-3 alignleft">
                         <a href="complete/" class="btn btn-success btn-lg active" role="button"
@@ -232,27 +182,9 @@
                     </div>
 
                 </form>
-
-
-                <!-- <div class="row">
-              <div class="col ml-md-3"> -->
-                <!-- <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle" type="button"></button></div> -->
-                <!-- <a
-                            class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>Next videot</a>
-                <a href="next/">Next</a>
-              </div>
-            </div>
-            
-            <br>
-            <a href="complete/">Completed this Lecture</a> -->
-                <!-- </div>
- </div> -->
-
-
                 <footer class="bg-white sticky-footer">
                     <div class="container my-auto">
-                        <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                        <div class="text-center my-auto copyright"><span>Copyright © CTC 2021</span></div>
                     </div>
                 </footer>
             </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

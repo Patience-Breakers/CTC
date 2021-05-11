@@ -246,10 +246,11 @@ def openLectlistfromstudent(request, studentid, courseid):
 
     mylist = zip(lectures, watchtimelist)
     ##  Students.objects.raw('SELECT * FROM accounts_student where student_id=%s',[studentid])
+    student = Student.objects.get(pk=studentid)
     context = {
         # 'lectures' :lectures,
         'mylist': mylist,
-        'student': Student.objects.raw('SELECT * FROM accounts_student where student_id=%s', [studentid]),
+        'student': student,
         'studentid': studentid,
         'course': course,
     }
