@@ -29,6 +29,8 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="/studentprofile/{{studentid}}"><i
                                 class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/students/{{studentid}}"><i
+                                class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/teachers"><i
                                 class="fas fa-user-circle"></i><span>Teachers</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/allcourses"><i
@@ -203,30 +205,36 @@
                                     </thead>
                                     <tbody>
                                         {% for lecture,watchtime in mylist %}
-                                        <a href="lecture/{{lecture.pk}}" style="text-decoration:none;">
-                                            <tr>
-                                                <td><img class="rounded-circle mr-2" width="150" height="150"
-                                                        src="/media/{{lecture.thumbnail}}"></td>
-                                                <td>
-                                                    {{lecture.lecture_name}}
-                                                </td>
-                                                <td>{{lecture.lec_no}}</td>
-                                                <td>{{lecture.lec_date}}<br></td>
-                                                <td>{% if watchtime.completed %}
-                                                    <p> Completed </p>
-                                                    {% else %}
-                                                    <p> Not Started </p>
-                                                    {% endif %}
-                                                </td>
-                                                <td>{% if watchtime.completed %}
-                                                    <p> {{watchtime.completed_date}} </p>
-                                                    {% else %}
-                                                    <p> --- </p>
-                                                    {% endif %}
-                                                </td>
-                                                <!-- <td>{{watchtime.completed_date}}</td> -->
-                                            </tr>
-                                        </a>
+
+                                        <div class="bg-light" style="background-color: aquamarine;">
+                                            <a href="lecture/{{lecture.pk}}">
+                                                <tr>
+                                                    <td><img class="rounded-circle mr-2" width="150" height="150"
+                                                            src="/media/{{lecture.thumbnail}}"></td>
+                                                    <td>
+                                                        <a href="lecture/{{lecture.pk}}" style="text-decoration:none;">
+                                                            {{lecture.lecture_name}}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{lecture.lec_no}}</td>
+                                                    <td>{{lecture.lec_date}}<br></td>
+                                                    <td>{% if watchtime.completed %}
+                                                        <p> Completed </p>
+                                                        {% else %}
+                                                        <p> Not Started </p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{% if watchtime.completed %}
+                                                        <p> {{watchtime.completed_date}} </p>
+                                                        {% else %}
+                                                        <p> --- </p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- <td>{{watchtime.completed_date}}</td> -->
+                                                </tr>
+                                            </a>
+                                        </div>
+
                                         {% endfor %}
                                     </tbody>
                                 </table>

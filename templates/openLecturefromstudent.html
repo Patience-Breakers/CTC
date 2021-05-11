@@ -45,91 +45,7 @@
             transform: scale(1.05);
         }
     </style>
-    <style>
-        .alignleft {
-            float: left;
-            width: 33.33333%;
-            text-align: left;
-        }
 
-        .aligncenter {
-            float: left;
-            width: 33.33333%;
-            text-align: center;
-        }
-
-        .alignright {
-            float: left;
-            width: 33.33333%;
-            text-align: right;
-        }
-
-        ​ .rating {
-            display: inline-block;
-            position: relative;
-            height: 50px;
-            line-height: 50px;
-            font-size: 50px;
-        }
-
-        .rating label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .rating label:last-child {
-            position: static;
-        }
-
-        .rating label:nth-child(1) {
-            z-index: 5;
-        }
-
-        .rating label:nth-child(2) {
-            z-index: 4;
-        }
-
-        .rating label:nth-child(3) {
-            z-index: 3;
-        }
-
-        .rating label:nth-child(4) {
-            z-index: 2;
-        }
-
-        .rating label:nth-child(5) {
-            z-index: 1;
-        }
-
-        .rating label input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-        }
-
-        .rating label .icon {
-            float: left;
-            color: transparent;
-        }
-
-        .rating label:last-child .icon {
-            color: #000;
-        }
-
-        .rating:not(:hover) label input:checked~.icon,
-        .rating:hover label:hover input~.icon {
-            color: #09f;
-        }
-
-        .rating label input:focus:not(:checked)~.icon:last-child {
-            color: #000;
-            text-shadow: 0 0 5px #09f;
-        }
-    </style>
 </head>
 
 <body id="page-top">
@@ -138,16 +54,17 @@
             <div class="container-fluid d-flex flex-column p-0"><a
                     class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
+                    <div class="sidebar-brand-text mx-3"><span>CTC</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="/students/{{student.pk}}"><i
-                                class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+
                     <li class="nav-item"><a class="nav-link" href="/studentprofile/{{student.pk}}"><i
                                 class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/students/{{student.pk}}"><i
+                                class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/students/{{student.pk}}/courses/{{course.pk}}/"><i
-                                class="fas fa-table"></i><span>Table</span></a></li>
+                                class="fas fa-table"></i><span>Courses</span></a></li>
 
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
@@ -182,99 +99,6 @@
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        aria-expanded="false" data-toggle="dropdown" href="#"><span
-                                            class="badge badge-danger badge-counter">3+</span><i
-                                            class="fas fa-bell fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a
-                                            class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-primary icon-circle"><i
-                                                        class="fas fa-file-alt text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>A new monthly report is ready to download!</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-success icon-circle"><i
-                                                        class="fas fa-donate text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 7, 2019</span>
-                                                <p>$290.29 has been deposited into your account!</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-warning icon-circle"><i
-                                                        class="fas fa-exclamation-triangle text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 2, 2019</span>
-                                                <p>Spending Alert: We've noticed unusually high spending for your
-                                                    account.</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                                            Alerts</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        aria-expanded="false" data-toggle="dropdown" href="#"><span
-                                            class="badge badge-danger badge-counter">7</span><i
-                                            class="fas fa-envelope fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a
-                                            class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                    src="assets/img/avatars/avatar4.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Hi there! I am wondering if you can
-                                                        help me with a problem I've been having.</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                    src="assets/img/avatars/avatar2.jpeg">
-                                                <div class="status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>I have the photos that you ordered last
-                                                        month!</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                    src="assets/img/avatars/avatar3.jpeg">
-                                                <div class="bg-warning status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Last month's report looks great, I am
-                                                        very happy with the progress so far, keep up the good
-                                                        work!</span></div>
-                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                    src="assets/img/avatars/avatar5.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is
-                                                        because someone told me that people say this to all dogs, even
-                                                        if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                                            Alerts</a>
-                                    </div>
-                                </div>
-                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right"
-                                    aria-labelledby="alertsDropdown"></div>
-                            </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
@@ -298,11 +122,17 @@
                         </ul>
                     </div>
                 </nav>
+
+
+                <!--todo navbar ends here -->
                 <div class="container-fluid">
                     <div class="block-heading">
-                        <h2 class="text-black">Course : {{course.course_name}}</h2>
-                        <h2 class="text-black">Lecture : {{lecture.lec_no}}. {{lecture.lecture_name}} </h2>
-                        <!-- <h2 class="text-black">Lecture Video path : {{Lecture.video}} </h2> -->
+                        <h6 class="text-black"><a style="text-decoration: none;"
+                                href="/students/{{student.pk}}/courses/{{course.pk}}/">Course :
+                                {{course.course_name}} </a> <i style="color:#868e96;" class="fas fa-arrow-right"></i>
+                            Lecture : {{lecture.lec_no}}.
+                            {{lecture.lecture_name}}</h6>
+
                     </div>
                     <!-- <video width="100%" height="600px" controls>
               <source src="/media/{{Lecture.video}}" type="video/mp4">
@@ -427,12 +257,17 @@
                 </footer>
             </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
         </div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/chart.min.js"></script>
-        <script src="assets/js/bs-init.js"></script>
+
+
+        <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+        <script src="{% static 'dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/chart.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/bs-init.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-        <script src="assets/js/theme.js"></script>
+        <script src="{% static 'dashboard/js/theme.js' %}"></script>
+
+
+
         <script>$(':radio').change(function () {
                 console.log('New star rating: ' + this.value);
             });</script>
