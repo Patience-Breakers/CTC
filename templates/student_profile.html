@@ -22,21 +22,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <!-- <title>Login - Brand</title> -->
     <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="shortcut icon"
+        href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png" />
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
     <style>
-      /* #borderimg1 {
+        /* #borderimg1 {
   border: 10px solid transparent;
   padding: 15px; 
 } */
-img {
-        width: 270px;
-        border: 1px solid black;
-      }
-      </style>
+        img {
+            width: 270px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-primary">
@@ -47,15 +50,16 @@ img {
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-flex">
-                              <!-- <p id="borderimg1"></p> -->
-                                <img id="borderimg1" src="/media/{{student.image}}" width="80%" vspace='10' hspace='30'  height='90%' alt="">
+                                <!-- <p id="borderimg1"></p> -->
+                                <img id="borderimg1" src="/media/{{student.image}}" width="80%" vspace='10' hspace='30'
+                                    height='90%' alt="">
                             </div>
-                          
+
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                         <h4 class="text-dark mb-4">
-                              Hii {{student.name}} !</h4>
+                                        <h4 class="text-dark mb-4">
+                                            Hii {{student.name}} !</h4>
 
                                         <ul>
                                             <li class="list-group-item"> Name : {{student.name}}</li>

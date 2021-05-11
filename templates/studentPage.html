@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 
@@ -10,19 +9,17 @@
         {{student.name}} | Dashboard
     </title>
     <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="shortcut icon"
+        href="https://res.cloudinary.com/dnv3ztqf1/image/upload/v1605866352/Images%20for%20UNSCRIPT%20ROOKIE/favicon/logo_transparent_background_u9eopl.png" />
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/fonts/fontawesome5-overrides.min.css' %}">
-
 </head>
 
 <body id="page-top">
-
-
-
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -60,7 +57,6 @@
                                 class="fas fa-user-circle"></i><span>Teachers</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/allcourses"><i
                                 class="fas fa-table"></i><span>Courses</span></a></li>
-
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                         id="sidebarToggle" type="button"></button></div>
@@ -74,7 +70,6 @@
                         <form action='/search' method="POST"
                             class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             {% csrf_token %}
-
                             <div class="input-group"><input name="query" id="query" for="query"
                                     class="bg-light form-control border-0 small" type="text"
                                     placeholder="Search for material">
@@ -92,7 +87,6 @@
                                     <form action='/search' method="POST"
                                         class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                         {% csrf_token %}
-
                                         <div class="input-group"><input name="query" id="query" for="query"
                                                 class="bg-light form-control border-0 small" type="text"
                                                 placeholder="Search for material from our crawler">
@@ -220,20 +214,16 @@
                             &nbsp;Generate Report
                         </a>
                     </div>
-
                     <div class="row">
-
                         {% for mylist,course in myfile %}
                         <div class="col-md-6 col-xl-3 mb-4">
                             <a href="courses/{{ course.pk }}" style="text-decoration: none; color :black;">
-
                                 <div class="card shadow border-left-info py-2">
                                     <div class="card-body">
                                         <div class="row align-items-center no-gutters">
                                             <div class="col mr-2">
                                                 <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
                                                     <span id="course_name">{{course.course_name}}</span>
-
                                                 </div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
@@ -260,53 +250,28 @@
                                 </div>
                             </a>
                         </div>
-
                         {% endfor %}
-
                     </div>
-
-
                     <div class="row">
                         <div class="col-lg-7 col-xl-8">
+                            <!--todo Student Progress chart starts here  -->
+
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h6 class="text-primary font-weight-bold m-0">Student progress</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle"
-                                            aria-expanded="false" data-toggle="dropdown" type="button"><i
-                                                class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a
-                                                class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
-                                                href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item"
-                                                href="#">&nbsp;Something else here</a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Student progress ka canvas chart -->
-
-                                    <div class="wrapper">
-                                        <h1>Student Progress Chart </h1>
-                                        <h2>Last 8 Months</h2>
-
-                                        <canvas id="myChart" width="250" height='150'></canvas>
-
-                                    </div>
-
-
-                                    <!-- <div class="card-body">
-                                    <div class="chart-area"><canvas
-                                            data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Earnings&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 115, 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}]}}}"></canvas>
-                                    </div>
-                                </div> -->
+                                </div>
+                                <div class="card-body">
+                                    <!-- !here i need to add the chart -->
+                                    <canvas id="progressChart" width="40px" height="40px"></canvas>
+                                    <!-- !here i need to add the chart -->
                                 </div>
                             </div>
+                            <!--todo Student Progress chart ENDS here  -->
                         </div>
                         <div class="col-lg-5 col-xl-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h6 class="text-primary font-weight-bold m-0">Hours Spent On</h6>
-
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
@@ -319,30 +284,25 @@
                                             var ctx = document.getElementById('myaChart').getContext('2d');
                                             ctx.canvas.parentNode.style.width = "350px";
                                             ctx.canvas.parentNode.style.height = "350px";
-
                                             width = screen.width;
                                             if (width < 600) {
-                                                ctx.canvas.parentNode.style.width = "300px";
-                                                ctx.canvas.parentNode.style.height = "300px";
+                                                ctx.canvas.parentNode.style.width = "220px";
+                                                ctx.canvas.parentNode.style.height = "220px";
                                             }
                                             var myChart = new Chart(ctx, {
                                                 type: 'pie',
                                                 data: {
                                                     labels: [
                                                         {% for course in courses %}
-                               
                                   '{{course.course_name}}',
                                  {% endfor %}      
                     ],
                                             datasets: [{
                                                 label: '# of Votes',
-
                                                 data: [
                                                     {% for list in graphlist %}
                            {{ list }},
                                             {% endfor %}
-
-
                                             ],
                                                 backgroundColor: [
                                                     'rgba(255, 99, 132, 0.2)',
@@ -365,39 +325,33 @@
                 },
                                             options: {
                                                 scales: {
-
                                                     yAxes: [{
                                                         ticks: {
                                                             beginAtZero: true
                                                         }
                                                     }]
                                                 }, scales: false,
-
                 }
             });
                                         </script>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 mb-4">
-
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-md-6">
                                             <h3 class="text-primary font-weight-bold m-0">Todo List </h6>
                                         </div>
-                                        <div class="col ">
+                                        <div class="col-md-6 ">
                                             <form action='/addtodo/{{student.pk}}/' method="POST"
                                                 class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                                 {% csrf_token %}
                                                 <div class="input-group">
-
                                                     <input name="query" id="query" for="query"
                                                         class="bg-light form-control border-0 small" type="text"
                                                         placeholder="Add task">
@@ -408,16 +362,9 @@
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </form>
-
-
                                         </div>
-
                                     </div>
-
-
-
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <form action="/student/{{student.pk}}" method="POST">
@@ -425,36 +372,28 @@
                                         {% csrf_token %}
                                         <li class="list-group-item">
                                             <div class="row align-items-center no-gutters">
-                                                <div class="col mr-2">
-                                                    <h4 class="mb-0"><strong> <label
-                                                                for="{{task.pk}}">{{task.task}}</label></strong></h4>
+                                                <div class="col-md-9">
+                                                    <p class="mb-0"><strong> <label
+                                                                for="{{task.pk}}">{{task.task}}</label></strong></p>
                                                 </div>
-                                                <div class="card-header py-3">
+                                                <div class="col-md-3">
                                                     <a href="done/{{task.pk}}" class="btn btn-primary btn-lg active"
                                                         role="button" aria-pressed="true">Done Tasks</a>
-
                                                 </div>
                                         </li>
-
                                         {% endfor %}
-
                             </div>
-
-
                             </form>
-
-
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <footer class="bg-white sticky-footer">
         <div class="container my-auto">
-            <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+            <div class="text-center my-auto copyright"><span>Copyright © CTC 2021</span></div>
         </div>
     </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -466,7 +405,6 @@
     <script src="{% static 'dashboard/js/progress_chart.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="{% static 'dashboard/js/theme.js' %}"></script>
-
     <!--todo to make the pdf nav-->
     <script>
         function generator() {
@@ -475,10 +413,7 @@
             // a=element.val();
             // console.log(element);
             // m=a.toString();
-
-
             doc.text('Courses Enrolled', 10, 10);
-
             doc.text('{{course}}', 20, 20);
             doc.text('{{course1}}', 20, 30);
             // doc.text(m, 10, 10);
@@ -486,7 +421,59 @@
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+    <script>
+        var ctx = document.getElementById("progressChart").getContext("2d");
 
+
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                    }]
+                }
+            },
+            data: {
+                labels: ["2015-03-15T13:03:00Z", "2015-03-25T13:02:00Z", "2015-04-25T14:12:00Z"],
+                datasets: [{
+                    label: 'Demo',
+                    data: [{
+                        t: '2015-03-15T13:03:00Z',
+                        y: 12
+                    },
+                    {
+                        t: '2015-03-25T13:02:00Z',
+                        y: 21
+                    },
+                    {
+                        t: '2015-04-25T14:12:00Z',
+                        y: 32
+                    }
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
 </body>
 
 </html>
