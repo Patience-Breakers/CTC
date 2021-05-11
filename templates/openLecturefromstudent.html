@@ -126,7 +126,7 @@
 
                 <!--todo navbar ends here -->
                 <div class="container-fluid">
-                    <div class="block-heading">
+                    <div class="block-heading my-3">
                         <h6 class="text-black"><a style="text-decoration: none;"
                                 href="/students/{{student.pk}}/courses/{{course.pk}}/">Course :
                                 {{course.course_name}} </a> <i style="color:#868e96;" class="fas fa-arrow-right"></i>
@@ -141,8 +141,8 @@
 
 
 
-                    <div class="row">
-                        <div class="col ml-md-3"></div>
+                    <div class="row mx-4">
+                        <div class="col ml"></div>
                         <a href="/media/{{lecture.material}}" target="_blank" class="btn btn-primary btn-lg active"
                             role="button" aria-pressed="true">Open Reference Material</a>
                     </div>
@@ -151,12 +151,12 @@
                 <br>
 
 
-                <div class="row">
-                    <div class="col ml-md-3 alignleft">
+                <div class="row mx-4">
+                    <div class="col text-left">
                         <a href="complete/" class="btn btn-success btn-lg active" role="button"
                             aria-pressed="true">Completed this Lecture</a>
                     </div>
-                    <div class="col ml-md-3 alignright mx-4">
+                    <div class="col  text-right">
                         <a href="next/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Next
                             lecture</a>
                     </div>
@@ -166,21 +166,22 @@
 
                 <form action="/students/{{student.pk}}/courses/{{course.pk}}/lecture/{{lecture.pk}}/" method="POST">
                     {% csrf_token %}
-
-                    <div class="form-group mx-5 margin-right">
+                    <div class="row mx-4">
                         <label id="white" for="rating">Rate this lecture</label>
-                        <select class="form-control" id="rating" name="rating">
-                            <option id="black">1</option>
-                            <option id="black">2</option>
-                            <option id="black">3</option>
-                            <option id="black">4</option>
-                            <option id="black">5</option>
-                        </select>
-                    </div>
-                    <div class="btn btn-primary">
-                        <input style="font-weight:800;" class="text-center" type="submit">
-                    </div>
 
+                        <div class="col-9">
+                            <select class="form-control" id="rating" name="rating">
+                                <option id="black">1</option>
+                                <option id="black">2</option>
+                                <option id="black">3</option>
+                                <option id="black">4</option>
+                                <option id="black">5</option>
+                            </select>
+                        </div>
+                        <div class="col text-right">
+                            <input style="font-weight:800;" class="btn btn-primary" type="submit">
+                        </div>
+                    </div>
                 </form>
                 <footer class="bg-white sticky-footer">
                     <div class="container my-auto">
