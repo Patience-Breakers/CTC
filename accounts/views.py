@@ -438,7 +438,7 @@ def addstudent(request):
         password = request.POST.get('password')
         email = request.POST.get('email')
         stud_category = request.POST.get('stud_category')
-        courses = request.POST.get('courses')
+        courses = request.POST.getlist('courses')
         image_str = 'course-images/blogimg1.png'
         # for course in courses:
         print("###########", courses)
@@ -453,20 +453,39 @@ def addstudent(request):
         )
         user.save()
         # Student.objects.raw('Insert into accounts_student VALUES(%s,%s,%s,'ask','ask@gmail.com',5896412589,'course-images/blogimg1.png','2020-08-02','U')')
-        # for course in courses:
-        p1 = Course.objects.get(course_id=courses)
-        user.courses.add(p1)
-        user.save()
-        myteacher = Teacher.objects.raw(
-            'SELECT * FROM accounts_teacher WHERE course_id=%s', [courses])[0]
-        # lectures = Lecture.objects.filter(teacher__pk=myteacher.pk)
-        lectures = Lecture.objects.raw(
-            'SELECT * FROM accounts_lecture WHERE teacher_id=%s', [myteacher.teacher_id])
-        for lecture in lectures:
-            watch_object = Watch_time()
-            watch_object.student = user
-            watch_object.w_lect = lecture
-            watch_object.save()
+        for course in courses:
+            p1 = Course.objects.get(course_id=course)
+            user.courses.add(p1)
+            user.save()
+        # myteacher = Teacher.objects.raw(
+        #     'SELECT * FROM accounts_teacher WHERE course_id=%s', [courses])[0]
+
+        try:
+            myteacher=[]
+            lectures=[]
+            for course in courses:
+                myteacher.append(Teacher.objects.get(course__pk=course))
+            for tech in myteacher:
+                lectures.append(Lecture.objects.filter(teacher__pk=tech.pk))
+            print('\n\n\n\n\n\n\n\n')
+            print(lectures)
+            print('\n\n\n\n\n\n\n\n')
+
+        except Exception as e:
+            print("\n\n\n\n\n\n\n\n\n\n1 An exception occurred:  \n\n\n\n\n\n\n\n\n\n", e)
+
+        # lectures = Lecture.objects.raw(
+        #     'SELECT * FROM accounts_lecture WHERE teacher_id=%s', [myteacher.teacher_id])
+
+        try:
+            for lecture in lectures:
+                for lect in lecture:
+                    watch_object = Watch_time()
+                    watch_object.student = user
+                    watch_object.w_lect = lect
+                    watch_object.save()
+        except Exception as e:
+            print("\n\n\n\n\n\n\n\n\n\n2 An exception occurred: \n\n\n\n\n\n\n\n\n\n", e)
 
         return redirect('/')
     else:
